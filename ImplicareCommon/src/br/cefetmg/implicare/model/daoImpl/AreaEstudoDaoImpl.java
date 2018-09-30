@@ -23,7 +23,7 @@ import java.util.List;
 public class AreaEstudoDaoImpl implements AreaEstudoDao {
 
     @Override
-    public List<AreaEstudo> listAll() throws PersistenceException {
+    public ArrayList<AreaEstudo> listAll() throws PersistenceException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
@@ -32,7 +32,7 @@ public class AreaEstudoDaoImpl implements AreaEstudoDao {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            List<AreaEstudo> listAll = new ArrayList<>();
+            ArrayList<AreaEstudo> listAll = new ArrayList<>();
             
             if (rs.next()) {
                 do {

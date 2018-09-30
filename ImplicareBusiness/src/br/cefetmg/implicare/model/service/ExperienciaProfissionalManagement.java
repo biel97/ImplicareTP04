@@ -18,8 +18,8 @@ import java.util.List;
  */
 public interface ExperienciaProfissionalManagement {
     public void insert(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException;
-    public boolean update(Long CPF, int Seq_Experiencia, int Cod_Cargo, ExperienciaProfissional ExperienciaProfssional) throws BusinessException, PersistenceException;
-    public boolean delete(Long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException;
-    public List<ExperienciaProfissional> getExperienciasProfissionais(Long CPF) throws PersistenceException;
-    public ExperienciaProfissional getExperienciaProfissionalCod(Long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException;
+    public boolean update(long CPF, int Seq_Experiencia, int Cod_Cargo, ExperienciaProfissional ExperienciaProfssional) throws BusinessException, PersistenceException;
+    public boolean delete(long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException;
+    public List<ExperienciaProfissional> getExperienciasProfissionais(long CPF) throws PersistenceException;
+    public ExperienciaProfissional getExperienciaProfissionalCod(long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException;
 }
