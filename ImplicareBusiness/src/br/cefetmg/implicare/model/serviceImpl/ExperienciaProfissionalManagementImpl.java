@@ -30,25 +30,25 @@ public class ExperienciaProfissionalManagementImpl implements ExperienciaProfiss
     }
 
     @Override
-    public boolean update(Long CPF, int Seq_Experiencia, int Cod_Cargo, ExperienciaProfissional ExperienciaProfssional) throws BusinessException, PersistenceException {
+    public boolean update(long CPF, int Seq_Experiencia, int Cod_Cargo, ExperienciaProfissional ExperienciaProfssional) throws BusinessException, PersistenceException {
         boolean result = ExperienciaProfissionalDao.update(CPF, Seq_Experiencia, Cod_Cargo, ExperienciaProfssional);
         return result;
     }
 
     @Override
-    public boolean delete(Long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
+    public boolean delete(long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
         boolean result = ExperienciaProfissionalDao.delete(CPF, Seq_Experiencia, Cod_Cargo);
         return result;
     }
 
     @Override
-    public List<ExperienciaProfissional> getExperienciasProfissionais(Long CPF) throws PersistenceException {
+    public List<ExperienciaProfissional> getExperienciasProfissionais(long CPF) throws PersistenceException {
         List<ExperienciaProfissional> result = ExperienciaProfissionalDao.getExperienciasProfissionais(CPF);
         return result;
     }
 
     @Override
-    public ExperienciaProfissional getExperienciaProfissionalCod(Long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
+    public ExperienciaProfissional getExperienciaProfissionalCod(long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
         ExperienciaProfissional result = ExperienciaProfissionalDao.getExperienciaProfissionalCod(CPF, Seq_Experiencia, Cod_Cargo);
         return result;
     }
