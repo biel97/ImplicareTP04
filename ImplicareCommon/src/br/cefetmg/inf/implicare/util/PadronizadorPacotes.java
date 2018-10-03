@@ -92,8 +92,8 @@ public class PadronizadorPacotes {
         }
 
         byte[] pacoteOriginal = null;
-        for (int i = 0; i < pacotesAgrupados.length; i++) {
-            pacoteOriginal=ArrayUtils.addAll(pacoteOriginal, pacotesAgrupados[i]);
+        for (byte[] pacotesAgrupado : pacotesAgrupados) {
+            pacoteOriginal = ArrayUtils.addAll(pacoteOriginal, pacotesAgrupado);
         }
         return pacoteOriginal;
     }
