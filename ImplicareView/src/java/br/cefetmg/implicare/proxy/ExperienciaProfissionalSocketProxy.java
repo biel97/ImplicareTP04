@@ -9,6 +9,7 @@ import br.cefetmg.implicare.model.domain.ExperienciaProfissional;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.ExperienciaProfissionalManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -46,16 +47,17 @@ public class ExperienciaProfissionalSocketProxy implements ExperienciaProfission
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(ExperienciaProfissional));
-        pacoteEnviado = new Pacote(TipoOperacao.INS_ExperienciaProfissional, dados);
+        pacoteEnviado = new Pacote(TipOperacao.INSERT_EXP_PROFSS, dados);
 
         Cliente.requisicao(pacoteEnviado);
     }
 
     @Override
-    public boolean update(Long CPF, int Seq_Experiencia, int Cod_Cargo, ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException {
+    public boolean update(long CPF, int Seq_Experiencia, int Cod_Cargo, ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
-
+        Pacote pacoteRecebido;
+        boolean pacote;
+        
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
@@ -64,17 +66,26 @@ public class ExperienciaProfissionalSocketProxy implements ExperienciaProfission
         dados.add(gson.toJson(Seq_Experiencia));
         dados.add(gson.toJson(Cod_Cargo));
         dados.add(gson.toJson(ExperienciaProfissional));
-        pacoteEnviado = new Pacote(TipoOperacao.UPD_ExperienciaProfissional, dados);
+        pacoteEnviado = new Pacote(TipOperacao.ATUALIZA_EXP_PROFSS, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        
+         if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
-    public boolean delete(Long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
+    public boolean delete(long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
-
+        Pacote pacoteRecebido;
+        boolean pacote;
+        
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
@@ -82,14 +93,22 @@ public class ExperienciaProfissionalSocketProxy implements ExperienciaProfission
         dados.add(gson.toJson(CPF));
         dados.add(gson.toJson(Seq_Experiencia));
         dados.add(gson.toJson(Cod_Cargo));
-        pacoteEnviado = new Pacote(TipoOperacao.DEL_ExperienciaProfissional, dados);
+        pacoteEnviado = new Pacote(TipOperacao.DELETE_EXP_PROFSS, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        
+         if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
-    public List<ExperienciaProfissional> getExperienciasProfissionais(Long CPF) throws PersistenceException {
+    public List<ExperienciaProfissional> getExperienciasProfissionais(long CPF) throws PersistenceException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -98,7 +117,7 @@ public class ExperienciaProfissionalSocketProxy implements ExperienciaProfission
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(CPF));
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_ExperienciaProfissional, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_EXP_PROFSS_CPF, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -110,7 +129,7 @@ public class ExperienciaProfissionalSocketProxy implements ExperienciaProfission
     }
 
     @Override
-    public ExperienciaProfissional getExperienciaProfissionalCod(Long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
+    public ExperienciaProfissional getExperienciaProfissionalCod(long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -121,11 +140,11 @@ public class ExperienciaProfissionalSocketProxy implements ExperienciaProfission
         dados.add(gson.toJson(CPF));
         dados.add(gson.toJson(Seq_Experiencia));
         dados.add(gson.toJson(Cod_Cargo));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_ExperienciaProfissional, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_EXP_PROFSS_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         ExperienciaProfissional ExpProfissional = gson.fromJson(pacoteRecebido.getDados().get(0), ExperienciaProfissional.class);
         return ExpProfissional;
     }
-    
+
 }

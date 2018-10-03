@@ -10,6 +10,7 @@ import br.cefetmg.implicare.model.domain.CargoAreaEstudo;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CargoAreaEstudoManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -48,7 +49,7 @@ public class CargoAreaEstudoSocketProxy implements CargoAreaEstudoManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(FormAcad));
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_CargoAreaEstudo, dados);
+        pacoteEnviado = new Pacote(TipOperacao.GET_CARGO_AREA_ESTUDO, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         

@@ -9,6 +9,7 @@ import br.cefetmg.implicare.model.domain.CargoInteresse;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CargoInteresseManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -46,7 +47,7 @@ public class CargoInteresseSocketProxy implements CargoInteresseManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(CargoInteresse));
-        pacoteEnviado = new Pacote(TipoOperacao.INS_CargoInteresse, dados);
+        pacoteEnviado = new Pacote(TipOperacao.INSERT_CARGO_INTERESSE, dados);
 
         Cliente.requisicao(pacoteEnviado);
     }
@@ -54,7 +55,8 @@ public class CargoInteresseSocketProxy implements CargoInteresseManagement {
     @Override
     public boolean delete(long CPF, int Cod_Cargo) throws PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
+        Pacote pacoteRecebido;
+        boolean pacote;
 
         Gson gson = new Gson();
 
@@ -62,10 +64,18 @@ public class CargoInteresseSocketProxy implements CargoInteresseManagement {
 
         dados.add(gson.toJson(CPF));
         dados.add(gson.toJson(Cod_Cargo));
-        pacoteEnviado = new Pacote(TipoOperacao.DEL_CargoInteresse, dados);
+        pacoteEnviado = new Pacote(TipOperacao.DELETE_CARGO_INTERESSE, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        
+        if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
@@ -78,7 +88,7 @@ public class CargoInteresseSocketProxy implements CargoInteresseManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(CPF));
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_CargoInteresse, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_CARGO_INTERESSE, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -100,7 +110,7 @@ public class CargoInteresseSocketProxy implements CargoInteresseManagement {
         
         dados.add(gson.toJson(CPF));
         dados.add(gson.toJson(Cod_Cargo));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_CargoInteresse, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_CARGO_INTERESSE_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         CargoInteresse CarInteresse = gson.fromJson(pacoteRecebido.getDados().get(0), CargoInteresse.class);

@@ -9,6 +9,7 @@ import br.cefetmg.implicare.model.domain.CandidatoVaga;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CandidatoVagaManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -47,7 +48,7 @@ public class CandidatoVagaSocketProxy implements CandidatoVagaManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(CandidatoVaga));
-        pacoteEnviado = new Pacote(TipoOperacao.INS_CandidatoVaga, dados);
+        pacoteEnviado = new Pacote(TipOperacao.INSERT_CAND_VAGA, dados);
 
         Cliente.requisicao(pacoteEnviado);
     }
@@ -55,8 +56,9 @@ public class CandidatoVagaSocketProxy implements CandidatoVagaManagement {
     @Override
     public boolean update(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
-
+        Pacote pacoteRecebido;
+        boolean pacote;
+        
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
@@ -65,10 +67,17 @@ public class CandidatoVagaSocketProxy implements CandidatoVagaManagement {
         dados.add(gson.toJson(Cod_Cargo));
         dados.add(gson.toJson(Dat_Publicacao));
         dados.add(gson.toJson(CandidatoVaga));
-        pacoteEnviado = new Pacote(TipoOperacao.UPD_CandidatoVaga, dados);
+        pacoteEnviado = new Pacote(TipOperacao.ATUALIZAR_CAND_VAGA, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
@@ -83,7 +92,7 @@ public class CandidatoVagaSocketProxy implements CandidatoVagaManagement {
         dados.add(gson.toJson(Cod_Cargo));
         dados.add(gson.toJson(CNPJ));
         dados.add(gson.toJson(Dat_Publicacao));
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_CandidatosVaga, dados);
+        pacoteEnviado = new Pacote(TipOperacao.GET_CAND_VAGA, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -107,7 +116,7 @@ public class CandidatoVagaSocketProxy implements CandidatoVagaManagement {
         dados.add(gson.toJson(Cod_Cargo));
         dados.add(gson.toJson(CNPJ));
         dados.add(gson.toJson(Dat_Publicacao));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_CandidatoVaga, dados);
+        pacoteEnviado = new Pacote(TipOperacao.GET_CAND_VAGA_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         CandidatoVaga CandVaga = gson.fromJson(pacoteRecebido.getDados().get(0), CandidatoVaga.class);

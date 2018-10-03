@@ -8,6 +8,7 @@ package br.cefetmg.implicare.proxy;
 import br.cefetmg.implicare.model.domain.AreaEstudo;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.AreaEstudoManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -37,17 +38,17 @@ public class AreaEstudoSocketProxy implements AreaEstudoManagement {
     }
     
     @Override
-    public List<AreaEstudo> listAll() throws PersistenceException {
+    public ArrayList<AreaEstudo> listAll() throws PersistenceException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
         Gson gson = new Gson();
         
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_AreaEstudo, null);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_AREA_ESTUDO, null);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
-        List<AreaEstudo> AreaEst = gson.fromJson(pacoteRecebido.getDados().get(0),
+        ArrayList<AreaEstudo> AreaEst = gson.fromJson(pacoteRecebido.getDados().get(0),
                 new TypeToken<List<AreaEstudo>>() {
                 }.getType());
         
@@ -64,7 +65,7 @@ public class AreaEstudoSocketProxy implements AreaEstudoManagement {
         ArrayList<String> dados = new ArrayList<>();
         
         dados.add(gson.toJson(Cod_Area_Estudo));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_AreaEstudoCod, dados);
+        pacoteEnviado = new Pacote(TipOperacao.PESQ_AREA_ESTUDO_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         AreaEstudo AreaEst = gson.fromJson(pacoteRecebido.getDados().get(0), AreaEstudo.class);

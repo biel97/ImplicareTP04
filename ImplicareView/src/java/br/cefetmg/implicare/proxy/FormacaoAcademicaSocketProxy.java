@@ -9,6 +9,7 @@ import br.cefetmg.implicare.model.domain.FormacaoAcademica;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.FormacaoAcademicaManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -46,7 +47,7 @@ public class FormacaoAcademicaSocketProxy implements FormacaoAcademicaManagement
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(FormacaoAcademica));
-        pacoteEnviado = new Pacote(TipoOperacao.INS_FormacaoAcademica, dados);
+        pacoteEnviado = new Pacote(TipOperacao.INSERT_FORM_ACAD, dados);
 
         Cliente.requisicao(pacoteEnviado);
     }
@@ -54,8 +55,9 @@ public class FormacaoAcademicaSocketProxy implements FormacaoAcademicaManagement
     @Override
     public boolean update(long CPF, int Seq_Formacao, int Cod_Area_Estudo, FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
-
+        Pacote pacoteRecebido;
+        boolean pacote;
+        
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
@@ -64,17 +66,26 @@ public class FormacaoAcademicaSocketProxy implements FormacaoAcademicaManagement
         dados.add(gson.toJson(Seq_Formacao));
         dados.add(gson.toJson(Cod_Area_Estudo));
         dados.add(gson.toJson(FormacaoAcademica));
-        pacoteEnviado = new Pacote(TipoOperacao.UPD_FormacaoAcademica, dados);
+        pacoteEnviado = new Pacote(TipOperacao.ATUALIZA_FORM_ACAD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        
+        if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
     public boolean delete(long CPF, int Seq_Formacao, int Cod_Area_Estudo) throws PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
-
+        Pacote pacoteRecebido;
+        boolean pacote;
+        
         Gson gson = new Gson();
 
         ArrayList<String> dados = new ArrayList<>();
@@ -82,10 +93,18 @@ public class FormacaoAcademicaSocketProxy implements FormacaoAcademicaManagement
         dados.add(gson.toJson(CPF));
         dados.add(gson.toJson(Seq_Formacao));
         dados.add(gson.toJson(Cod_Area_Estudo));
-        pacoteEnviado = new Pacote(TipoOperacao.DEL_FormacaoAcademica, dados);
+        pacoteEnviado = new Pacote(TipOperacao.DELETE_FORM_ACAD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        
+        if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
@@ -98,7 +117,7 @@ public class FormacaoAcademicaSocketProxy implements FormacaoAcademicaManagement
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(CPF));
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_FormacaoAcademica, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_FORM_ACAD_CPF, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -121,7 +140,7 @@ public class FormacaoAcademicaSocketProxy implements FormacaoAcademicaManagement
         dados.add(gson.toJson(CPF));
         dados.add(gson.toJson(Seq_Formacao));
         dados.add(gson.toJson(Cod_Area_Estudo));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_FormacaoAcademica, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_FORM_ACAD_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         FormacaoAcademica FormAcad = gson.fromJson(pacoteRecebido.getDados().get(0), FormacaoAcademica.class);

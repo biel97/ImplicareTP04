@@ -5,13 +5,18 @@
  */
 package br.cefetmg.implicare.proxy;
 
+import br.cefetmg.inf.implicare.util.*;
+import com.google.gson.Gson;
+import java.io.IOException;
+import com.google.gson.stream.JsonReader;
 import java.io.StringReader;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import javax.json.JsonReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -91,9 +96,10 @@ class Cliente {
             
             bufferRecebido = PadronizadorPacotes.agrupaPacotes(pacotes);
             
-            JsonReader leitor = new JsonReader(new StringReader(new String(bufferRecebido))) {};
+            JsonReader leitor = new JsonReader(new StringReader(new String(bufferRecebido)));
             leitor.setLenient(true);
             pacote = gson.fromJson(leitor, Pacote.class);
+
 
         } catch (IOException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);

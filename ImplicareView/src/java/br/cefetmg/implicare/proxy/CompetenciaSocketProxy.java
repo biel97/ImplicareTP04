@@ -8,6 +8,7 @@ package br.cefetmg.implicare.proxy;
 import br.cefetmg.implicare.model.domain.Competencia;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CompetenciaManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -43,7 +44,7 @@ public class CompetenciaSocketProxy implements CompetenciaManagement {
 
         Gson gson = new Gson();
 
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_Competencia, null);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_COMPETENCIA, null);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -64,7 +65,7 @@ public class CompetenciaSocketProxy implements CompetenciaManagement {
         ArrayList<String> dados = new ArrayList<>();
         
         dados.add(gson.toJson(Cod_Competencia));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_Competencia, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_COMPETENCIA_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         Competencia Comp = gson.fromJson(pacoteRecebido.getDados().get(0), Competencia.class);

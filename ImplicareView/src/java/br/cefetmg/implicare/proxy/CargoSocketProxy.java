@@ -9,6 +9,7 @@ import br.cefetmg.implicare.model.domain.Cargo;
 import br.cefetmg.implicare.model.domain.CargoAreaEstudo;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CargoManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -45,7 +46,7 @@ public class CargoSocketProxy implements CargoManagement {
 
         Gson gson = new Gson();
         
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_Cargos, null);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_CARGO, null);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -66,7 +67,7 @@ public class CargoSocketProxy implements CargoManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(CargoArea));
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_CargoFormacao, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_CARGO_AREA, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -87,7 +88,7 @@ public class CargoSocketProxy implements CargoManagement {
         ArrayList<String> dados = new ArrayList<>();
         
         dados.add(gson.toJson(Cod_Cargo));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_Cargo, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_CARGO_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         Cargo Car = gson.fromJson(pacoteRecebido.getDados().get(0), Cargo.class);

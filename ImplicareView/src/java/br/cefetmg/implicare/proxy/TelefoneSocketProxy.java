@@ -9,6 +9,7 @@ import br.cefetmg.implicare.model.domain.Telefone;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.TelefoneManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -46,7 +47,7 @@ public class TelefoneSocketProxy implements TelefoneManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(Telefone));
-        pacoteEnviado = new Pacote(TipoOperacao.INS_Telefone, dados);
+        pacoteEnviado = new Pacote(TipOperacao.INSERT_TEL, dados);
 
         Cliente.requisicao(pacoteEnviado);
     }
@@ -54,7 +55,8 @@ public class TelefoneSocketProxy implements TelefoneManagement {
     @Override
     public boolean update(long CPF_CNPJ, String Num_Telefone, Telefone Telefone) throws BusinessException, PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
+        Pacote pacoteRecebido;
+        boolean pacote;
 
         Gson gson = new Gson();
 
@@ -63,16 +65,25 @@ public class TelefoneSocketProxy implements TelefoneManagement {
         dados.add(gson.toJson(CPF_CNPJ));
         dados.add(gson.toJson(Num_Telefone));
         dados.add(gson.toJson(Telefone));
-        pacoteEnviado = new Pacote(TipoOperacao.UPD_Telefone, dados);
+        pacoteEnviado = new Pacote(TipOperacao.ATUALIZA_TEL, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        
+         if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
     public boolean delete(long CPF_CNPJ, String Num_Telefone) throws PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
+        Pacote pacoteRecebido;
+        boolean pacote;
 
         Gson gson = new Gson();
 
@@ -80,10 +91,18 @@ public class TelefoneSocketProxy implements TelefoneManagement {
 
         dados.add(gson.toJson(CPF_CNPJ));
         dados.add(gson.toJson(Num_Telefone));
-        pacoteEnviado = new Pacote(TipoOperacao.DEL_Telefone, dados);
+        pacoteEnviado = new Pacote(TipOperacao.DELETE_TEL, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        
+         if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
@@ -96,7 +115,7 @@ public class TelefoneSocketProxy implements TelefoneManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(CPF_CNPJ));
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_Telefones, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_TEL_CPFNPJ, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -118,7 +137,7 @@ public class TelefoneSocketProxy implements TelefoneManagement {
         
         dados.add(gson.toJson(CPF_CNPJ));
         dados.add(gson.toJson(Num_Telefone));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_Telefone, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_TEL_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         Telefone Tel = gson.fromJson(pacoteRecebido.getDados().get(0), Telefone.class);

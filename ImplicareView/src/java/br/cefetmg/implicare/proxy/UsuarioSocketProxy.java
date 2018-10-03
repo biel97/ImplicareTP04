@@ -9,6 +9,7 @@ import br.cefetmg.implicare.model.domain.Usuario;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.UsuarioManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -44,7 +45,7 @@ public class UsuarioSocketProxy implements UsuarioManagement{
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(Usuario));
-        pacoteEnviado = new Pacote(TipoOperacao.INS_Usuario, dados);
+        pacoteEnviado = new Pacote(TipOperacao.INSERT_USUARIO, dados);
 
         Cliente.requisicao(pacoteEnviado);
     }
@@ -52,7 +53,8 @@ public class UsuarioSocketProxy implements UsuarioManagement{
     @Override
     public boolean update(Long CPF_CNPJ, Usuario Usuario) throws BusinessException, PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
+        Pacote pacoteRecebido;
+        boolean pacote;
 
         Gson gson = new Gson();
 
@@ -60,10 +62,18 @@ public class UsuarioSocketProxy implements UsuarioManagement{
 
         dados.add(gson.toJson(CPF_CNPJ));
         dados.add(gson.toJson(Usuario));
-        pacoteEnviado = new Pacote(TipoOperacao.UPD_Usuario, dados);
+        pacoteEnviado = new Pacote(TipOperacao.ATUALIZA_USUARIO, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        
+        if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
@@ -76,7 +86,7 @@ public class UsuarioSocketProxy implements UsuarioManagement{
         ArrayList<String> dados = new ArrayList<>();
         
         dados.add(gson.toJson(CPF_CNPJ));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_UsuarioCod, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_USUARIO_CPFNPJ, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         Usuario Usu = gson.fromJson(pacoteRecebido.getDados().get(0), Usuario.class);
@@ -94,7 +104,7 @@ public class UsuarioSocketProxy implements UsuarioManagement{
         
         dados.add(gson.toJson(CPF_CNPJ));
         dados.add(gson.toJson(Senha));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_Login, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LOGIN_USUARIO, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         Usuario Usu = gson.fromJson(pacoteRecebido.getDados().get(0), Usuario.class);

@@ -9,6 +9,7 @@ import br.cefetmg.implicare.model.domain.CompetenciaPessoaFisica;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CompetenciaPessoaFisicaManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -46,7 +47,7 @@ public class CompetenciaPessoaFisicaSocketProxy implements CompetenciaPessoaFisi
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(CompetenciaPessoaFisica));
-        pacoteEnviado = new Pacote(TipoOperacao.INS_CompetenciaPessoaFisica, dados);
+        pacoteEnviado = new Pacote(TipOperacao.INSERT_COMPETENCIA_PESSOA_FISICA, dados);
 
         Cliente.requisicao(pacoteEnviado);
     }
@@ -54,7 +55,8 @@ public class CompetenciaPessoaFisicaSocketProxy implements CompetenciaPessoaFisi
     @Override
     public boolean delete(long CPF, int Cod_Competencia) throws PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
+        Pacote pacoteRecebido;
+        boolean pacote;
 
         Gson gson = new Gson();
 
@@ -62,10 +64,18 @@ public class CompetenciaPessoaFisicaSocketProxy implements CompetenciaPessoaFisi
 
         dados.add(gson.toJson(CPF));
         dados.add(gson.toJson(Cod_Competencia));
-        pacoteEnviado = new Pacote(TipoOperacao.DEL_CompetenciaPessoaFisica, dados);
+        pacoteEnviado = new Pacote(TipOperacao.DELETE_COMPETENCIA_PESSOA_FISICA, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        
+        if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
@@ -78,7 +88,7 @@ public class CompetenciaPessoaFisicaSocketProxy implements CompetenciaPessoaFisi
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(CPF));
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_CompetenciaPessoaFisica, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_COMPETENCIA_PESSOA_FISICA_CPF, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -100,7 +110,7 @@ public class CompetenciaPessoaFisicaSocketProxy implements CompetenciaPessoaFisi
         
         dados.add(gson.toJson(CPF));
         dados.add(gson.toJson(Cod_Competencia));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_CompetenciaPessoaFisica, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_COMPETENCIA_PESSSOA_FIS_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         CompetenciaPessoaFisica CompPessoa = gson.fromJson(pacoteRecebido.getDados().get(0), CompetenciaPessoaFisica.class);

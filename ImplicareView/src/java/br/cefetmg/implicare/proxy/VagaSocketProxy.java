@@ -10,6 +10,7 @@ import br.cefetmg.implicare.model.domain.Vaga;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.VagaManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -48,7 +49,7 @@ public class VagaSocketProxy implements  VagaManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(Vaga));
-        pacoteEnviado = new Pacote(TipoOperacao.INS_Vaga, dados);
+        pacoteEnviado = new Pacote(TipOperacao.INSERT_VAGA, dados);
 
         Cliente.requisicao(pacoteEnviado);
     }
@@ -56,7 +57,8 @@ public class VagaSocketProxy implements  VagaManagement {
     @Override
     public boolean update(long CNPJ, int Cod_Cargo, Date Dat_Publicacao, Vaga Vaga) throws BusinessException, PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
+        Pacote pacoteRecebido;
+        boolean pacote;
 
         Gson gson = new Gson();
 
@@ -66,16 +68,25 @@ public class VagaSocketProxy implements  VagaManagement {
         dados.add(gson.toJson(Cod_Cargo));
         dados.add(gson.toJson(Dat_Publicacao));
         dados.add(gson.toJson(Vaga));
-        pacoteEnviado = new Pacote(TipoOperacao.UPD_Vaga, dados);
+        pacoteEnviado = new Pacote(TipOperacao.ATUALIZA_VAGA, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        
+        if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
     public boolean delete(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
+        Pacote pacoteRecebido;
+        boolean pacote;
 
         Gson gson = new Gson();
 
@@ -84,10 +95,18 @@ public class VagaSocketProxy implements  VagaManagement {
         dados.add(gson.toJson(CNPJ));
         dados.add(gson.toJson(Cod_Cargo));
         dados.add(gson.toJson(Dat_Publicacao));
-        pacoteEnviado = new Pacote(TipoOperacao.DEL_Vaga, dados);
+        pacoteEnviado = new Pacote(TipOperacao.DELETE_VAGA, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        
+        if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
@@ -100,7 +119,7 @@ public class VagaSocketProxy implements  VagaManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(CNPJ));
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_VagasEmpresa, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_VAGA_CNPJ, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -121,7 +140,7 @@ public class VagaSocketProxy implements  VagaManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(CarInteresse));
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_VagasCandidato, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_VAGA_POR_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -144,7 +163,7 @@ public class VagaSocketProxy implements  VagaManagement {
         dados.add(gson.toJson(CNPJ));
         dados.add(gson.toJson(Cod_Cargo));
         dados.add(gson.toJson(Dat_Publicacao));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_Vaga, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_VAGA_INFO, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         Vaga Vag = gson.fromJson(pacoteRecebido.getDados().get(0), Vaga.class);

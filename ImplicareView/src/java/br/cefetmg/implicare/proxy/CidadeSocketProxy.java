@@ -8,6 +8,7 @@ package br.cefetmg.implicare.proxy;
 import br.cefetmg.implicare.model.domain.Cidade;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CidadeManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -46,7 +47,7 @@ public class CidadeSocketProxy implements CidadeManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(Cod_Estado));
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_Cidades, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_CIDADE_POR_ESTADO, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -67,7 +68,7 @@ public class CidadeSocketProxy implements CidadeManagement {
         ArrayList<String> dados = new ArrayList<>();
         
         dados.add(gson.toJson(Cod_Cidade));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_Cidade, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_CIDADE_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         Cidade Cid = gson.fromJson(pacoteRecebido.getDados().get(0), Cidade.class);

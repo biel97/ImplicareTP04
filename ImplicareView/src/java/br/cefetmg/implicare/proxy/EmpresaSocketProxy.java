@@ -9,6 +9,7 @@ import br.cefetmg.implicare.model.domain.Empresa;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.EmpresaManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -44,7 +45,7 @@ public class EmpresaSocketProxy implements EmpresaManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(Empresa));
-        pacoteEnviado = new Pacote(TipoOperacao.INS_Empresa, dados);
+        pacoteEnviado = new Pacote(TipOperacao.INSERT_EMPRESA, dados);
 
         Cliente.requisicao(pacoteEnviado);
     }
@@ -52,7 +53,8 @@ public class EmpresaSocketProxy implements EmpresaManagement {
     @Override
     public boolean update(Long CNPJ, Empresa Empresa) throws BusinessException, PersistenceException {
         Pacote pacoteEnviado;
-        boolean pacoteRecebido;
+        Pacote pacoteRecebido;
+        boolean pacote;
 
         Gson gson = new Gson();
 
@@ -60,10 +62,18 @@ public class EmpresaSocketProxy implements EmpresaManagement {
 
         dados.add(gson.toJson(CNPJ));
         dados.add(gson.toJson(Empresa));
-        pacoteEnviado = new Pacote(TipoOperacao.UPD_Empresa, dados);
+        pacoteEnviado = new Pacote(TipOperacao.ATUALIZA_EMPRESA, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
-        return pacoteRecebido;
+        
+        if(pacoteRecebido != null){
+            pacote = true;
+        }
+        else{
+            pacote = false;
+        }
+        
+        return pacote;
     }
 
     @Override
@@ -76,7 +86,7 @@ public class EmpresaSocketProxy implements EmpresaManagement {
         ArrayList<String> dados = new ArrayList<>();
         
         dados.add(gson.toJson(CNPJ));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_Empresa, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_EMPRESA_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         Empresa Empr = gson.fromJson(pacoteRecebido.getDados().get(0), Empresa.class);

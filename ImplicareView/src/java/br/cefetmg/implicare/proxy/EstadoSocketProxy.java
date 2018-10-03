@@ -8,6 +8,7 @@ package br.cefetmg.implicare.proxy;
 import br.cefetmg.implicare.model.domain.Estado;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.EstadoManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -43,7 +44,7 @@ public class EstadoSocketProxy implements EstadoManagement {
 
         Gson gson = new Gson();
 
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_Estados, null);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_ESTADO, null);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -64,7 +65,7 @@ public class EstadoSocketProxy implements EstadoManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(Cod_Estado));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_Estado, dados);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_ESTADO_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         Estado Est = gson.fromJson(pacoteRecebido.getDados().get(0), Estado.class);

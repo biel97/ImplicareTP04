@@ -8,6 +8,7 @@ package br.cefetmg.implicare.proxy;
 import br.cefetmg.implicare.model.domain.Proficiencia;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.ProficienciaManagement;
+import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
@@ -43,7 +44,7 @@ public class ProficienciaSocketProxy implements ProficienciaManagement {
 
         Gson gson = new Gson();
 
-        pacoteEnviado = new Pacote(TipoOperacao.LIST_Proficiencia, null);
+        pacoteEnviado = new Pacote(TipOperacao.LISTA_PROFICI, null);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         
@@ -64,7 +65,7 @@ public class ProficienciaSocketProxy implements ProficienciaManagement {
         ArrayList<String> dados = new ArrayList<>();
 
         dados.add(gson.toJson(Cod_Proficiencia));
-        pacoteEnviado = new Pacote(TipoOperacao.PESQ_Proficiencia, dados);
+        pacoteEnviado = new Pacote(TipOperacao.GET_PROFICI_BY_COD, dados);
 
         pacoteRecebido = Cliente.requisicao(pacoteEnviado);
         Proficiencia Prof = gson.fromJson(pacoteRecebido.getDados().get(0), Proficiencia.class);
