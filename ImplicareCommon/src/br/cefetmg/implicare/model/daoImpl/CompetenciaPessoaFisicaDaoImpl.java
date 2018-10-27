@@ -19,10 +19,9 @@ public class CompetenciaPessoaFisicaDaoImpl implements CompetenciaPessoaFisicaDa
 
     @Override
     public void insert(CompetenciaPessoaFisica CompetenciaPessoaFisica) throws PersistenceException {
-        try {
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+
             Long Seq_CompetenciaPessoaFisica;
-                    
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
             String sql = "INSERT INTO CompetenciaPessoaFisica (CPF, Cod_Competencia, Cod_Proficiencia) "
                     + "VALUES(?,?,?) RETURNING Seq_CompetenciaPessoaFisica";
@@ -32,7 +31,7 @@ public class CompetenciaPessoaFisicaDaoImpl implements CompetenciaPessoaFisicaDa
             ps.setLong(1, CompetenciaPessoaFisica.getCPF());
             ps.setInt(2, CompetenciaPessoaFisica.getCod_Competencia());
             ps.setInt(3, CompetenciaPessoaFisica.getCod_Proficiencia());
-            
+
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -50,17 +49,16 @@ public class CompetenciaPessoaFisicaDaoImpl implements CompetenciaPessoaFisicaDa
 
     @Override
     public boolean delete(long CPF, int Cod_Competencia) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-            
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+
             String SQL = "DELETE FROM CompetenciaPessoaFisica"
                     + "WHERE CPF = ?, Cod_Competencia = ?";
-            
+
             PreparedStatement ps = connection.prepareStatement(SQL);
-            
+
             ps.setLong(1, CPF);
             ps.setInt(2, Cod_Competencia);
-            
+
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
@@ -73,9 +71,7 @@ public class CompetenciaPessoaFisicaDaoImpl implements CompetenciaPessoaFisicaDa
 
     @Override
     public List<CompetenciaPessoaFisica> getCompetenciasPessoaFisica(long CPF) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             String sql = "SELECT * FROM CompetenciaPessoaFisica WHERE CPF = ? ORDER BY Cod_Competencia;";
 
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -83,15 +79,15 @@ public class CompetenciaPessoaFisicaDaoImpl implements CompetenciaPessoaFisicaDa
             ResultSet rs = ps.executeQuery();
 
             List<CompetenciaPessoaFisica> Competencia = new ArrayList<>();
-            
+
             if (rs.next()) {
                 do {
                     CompetenciaPessoaFisica Comp = new CompetenciaPessoaFisica();
-                    
+
                     Comp.setCPF(rs.getLong("CPF"));
                     Comp.setCod_Competencia(rs.getInt("Cod_Competencia"));
                     Comp.setCod_Proficiencia(rs.getInt("Cod_Proficiencia"));
-                    
+
                     Competencia.add(Comp);
                 } while (rs.next());
             }
@@ -109,20 +105,19 @@ public class CompetenciaPessoaFisicaDaoImpl implements CompetenciaPessoaFisicaDa
 
     @Override
     public CompetenciaPessoaFisica getCompetenciaPessoaFisicaCod(long CPF, int Cod_Competencia) throws PersistenceException {
-        try {
-           Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM CompetenciaPessoaFisica WHERE CPF = ?, Cod_Competencia = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ps.setLong(1, CPF);
             ps.setInt(2, Cod_Competencia);
-            
+
             ResultSet rs = ps.executeQuery();
 
             CompetenciaPessoaFisica CompPessoa = new CompetenciaPessoaFisica();
-            
+
             if (rs.next()) {
                 CompPessoa.setCPF(rs.getLong("CPF"));
                 CompPessoa.setCod_Competencia(rs.getInt("Cod_Competencia"));
@@ -134,11 +129,10 @@ public class CompetenciaPessoaFisicaDaoImpl implements CompetenciaPessoaFisicaDa
             connection.close();
 
             return CompPessoa;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;
         }
     }
-    
 }

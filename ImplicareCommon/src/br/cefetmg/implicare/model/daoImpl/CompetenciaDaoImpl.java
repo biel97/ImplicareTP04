@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.model.dao.CompetenciaDao;
@@ -24,8 +19,7 @@ public class CompetenciaDaoImpl implements CompetenciaDao {
 
     @Override
     public List<Competencia> listAll() throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM Competencia ORDER BY Nom_Competencia;";
 
@@ -33,7 +27,7 @@ public class CompetenciaDaoImpl implements CompetenciaDao {
             ResultSet rs = ps.executeQuery();
 
             List<Competencia> listAll = new ArrayList<>();
-            
+
             if (rs.next()) {
                 do {
                     Competencia Comp = new Competencia();
@@ -56,8 +50,7 @@ public class CompetenciaDaoImpl implements CompetenciaDao {
 
     @Override
     public Competencia getCompetenciaCod(int Cod_Competencia) throws PersistenceException {
-        try {
-           Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM Competencia WHERE Cod_Competencia = ?";
 
@@ -66,7 +59,7 @@ public class CompetenciaDaoImpl implements CompetenciaDao {
             ResultSet rs = ps.executeQuery();
 
             Competencia Comp = new Competencia();
-            
+
             if (rs.next()) {
                 Comp.setCod_Competencia(rs.getInt("Cod_Competencia"));
                 Comp.setNom_Competencia(rs.getString("Nom_Competencia"));
@@ -77,11 +70,10 @@ public class CompetenciaDaoImpl implements CompetenciaDao {
             connection.close();
 
             return Comp;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;
         }
     }
-    
 }
