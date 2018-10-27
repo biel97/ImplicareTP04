@@ -1,51 +1,47 @@
 package br.cefetmg.implicare.model.domainJPA;
 
-import javax.persistence.Embedded;
+import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.IdClass;
+import javax.persistence.Id;
 
 /**
  *
  * @author João Victor Bonfim
  */
+//Praticamente concluído.
+@Entity(name = "cep")
+public class CepJPA implements Serializable {
 
-//WIP
+    @Id
+    private CepChave chavePrimaria;
 
-@Entity
-public class CepJPA {
-    
-    @Embedded
-    private CepChave chave;
-    
-    public CepJPA(long Cod_CEP, int Cod_Cidade, int Cod_Estado)
-    {
-        
-    }
-    
-    public long getCod_CEP()
-    {
-        
+    public CepJPA(){}
+
+    public CepJPA(long codCEP, int codCidade, int codEstado) {
+        chavePrimaria = new CepChave(codCEP, codCidade, codEstado);
     }
 
-    public void setCod_CEP(long Cod_CEP)
-    {
-        
+    public long getCodCEP() {
+        return chavePrimaria.getCodCEP();
     }
 
-    public int getCod_Cidade() {
-        return Cod_Cidade;
+    public void setCodCEP(long codCEP) {
+        chavePrimaria.setCodCEP(codCEP);
     }
 
-    public void setCod_Cidade(int Cod_Cidade) {
-        this.Cod_Cidade = Cod_Cidade;
+    public int getCodCidade() {
+        return chavePrimaria.getCodCidade();
     }
 
-    public int getCod_Estado() {
-        return Cod_Estado;
+    public void setCodCidade(int codCidade) {
+        chavePrimaria.setCodCidade(codCidade);
     }
 
-    public void setCod_Estado(int Cod_Estado)
-    {
-        
+    public int getCodEstado() {
+        return chavePrimaria.getCodEstado();
+    }
+
+    public void setCodEstado(int codEstado) {
+        chavePrimaria.setCodEstado(codEstado);
     }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.domain;
 
 import java.sql.Date;
@@ -12,18 +7,20 @@ import java.sql.Date;
  * @author Gabriel
  */
 public class PessoaFisica {
+
     private long CPF;
     private String Nome;
     private Date Data_Nascimento;
-    
-    public PessoaFisica(){}
-    
-    public PessoaFisica(long CPF, String Nome, Date Data_Nascimento){
+
+    public PessoaFisica() {
+    }
+
+    public PessoaFisica(long CPF, String Nome, Date Data_Nascimento) {
         this.CPF = CPF;
         this.Nome = Nome;
         this.Data_Nascimento = Data_Nascimento;
     }
-    
+
     public long getCPF() {
         return CPF;
     }
@@ -47,5 +44,5 @@ public class PessoaFisica {
     public void setData_Nascimento(Date Data_Nascimento) {
         this.Data_Nascimento = Data_Nascimento;
     }
-    
+
 }

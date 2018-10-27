@@ -27,5 +27,5 @@ public class Pacote {
     public void setDados(ArrayList<String> dados) {
         this.dados = dados;
     }
-    
+
 }
