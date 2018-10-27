@@ -1,53 +1,90 @@
 package br.cefetmg.implicare.model.domainJPA;
 
-import javax.persistence.Embeddable;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
 
 /**
  *
  * @author João Victor Bonfim
  */
-
 //WIP
+@Entity(name = "CepChave")
+@Table(name = "cepchave")
+@IdClass(CepJPA.class)
+public class CepChave implements Serializable {
 
-@Embeddable
-public class CepChave {
-    
-    private long Cod_CEP;
-    private int Cod_Cidade;
-    private int Cod_Estado;
+    @Id
+    @Column(name = "codCEP")
+    private long codCEP;
 
-    public CepChave(long Cod_CEP, int Cod_Cidade, int Cod_Estado) 
-    {
-        this.Cod_CEP = Cod_CEP;
-        this.Cod_Cidade = Cod_Cidade;
-        this.Cod_Estado = Cod_Estado;
+    @Id
+    @Column(name = "codCidade")
+    private int codCidade;
+
+    @Id
+    @Column(name = "codEstado")
+    private int codEstado;
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + (int) (this.codCEP ^ (this.codCEP >>> 32));
+        hash = 83 * hash + this.codCidade;
+        hash = 83 * hash + this.codEstado;
+        return hash;
     }
 
-    public long getCod_CEP()
-    {
-        return Cod_CEP;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final CepChave other = (CepChave) o;
+
+        return this.codCEP == other.codCEP
+                && this.codCidade == other.codCidade
+                && this.codEstado == other.codEstado;
     }
 
-    public void setCod_CEP(long Cod_CEP)
-    {
-        this.Cod_CEP = Cod_CEP;
+    public CepChave(long codCEP, int codCidade, int codEstado) {
+        this.codCEP = codCEP;
+        this.codCidade = codCidade;
+        this.codEstado = codEstado;
     }
 
-    public int getCod_Cidade() {
-        return Cod_Cidade;
+    public CepChave() {
     }
 
-    public void setCod_Cidade(int Cod_Cidade) {
-        this.Cod_Cidade = Cod_Cidade;
+    public long getCodCEP() {
+        return codCEP;
     }
 
-    public int getCod_Estado() {
-        return Cod_Estado;
+    public void setCodCEP(long codCEP) {
+        this.codCEP = codCEP;
     }
 
-    public void setCod_Estado(int Cod_Estado) {
-        this.Cod_Estado = Cod_Estado;
+    public int getCodCidade() {
+        return codCidade;
     }
-    
-    
+
+    public void setCodCidade(int codCidade) {
+        this.codCidade = codCidade;
+    }
+
+    public int getCodEstado() {
+        return codEstado;
+    }
+
+    public void setCodEstado(int codEstado) {
+        this.codEstado = codEstado;
+    }
 }
