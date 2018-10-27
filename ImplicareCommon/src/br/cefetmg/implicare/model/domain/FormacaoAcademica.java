@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.domain;
 
 import java.sql.Date;
@@ -12,6 +7,7 @@ import java.sql.Date;
  * @author Gabriel
  */
 public class FormacaoAcademica {
+
     private long CPF;
     private int Seq_Formacao;
     private String Instituicao_Ensino;
@@ -21,9 +17,10 @@ public class FormacaoAcademica {
     private Date Data_Termino;
     private String Desc_Formacao_Academica;
 
-    public FormacaoAcademica(){}
-    
-    public FormacaoAcademica(long CPF, int Seq_Formacao, String Instituicao_Ensino, int Cod_Area_Estudo, String Atividades_Desenvolvidas, Date Data_Inicio, Date Data_Termino, String Desc_Formacao_Academica){
+    public FormacaoAcademica() {
+    }
+
+    public FormacaoAcademica(long CPF, int Seq_Formacao, String Instituicao_Ensino, int Cod_Area_Estudo, String Atividades_Desenvolvidas, Date Data_Inicio, Date Data_Termino, String Desc_Formacao_Academica) {
         this.CPF = CPF;
         this.Seq_Formacao = Seq_Formacao;
         this.Instituicao_Ensino = Instituicao_Ensino;
@@ -33,7 +30,7 @@ public class FormacaoAcademica {
         this.Data_Termino = Data_Termino;
         this.Desc_Formacao_Academica = Desc_Formacao_Academica;
     }
-    
+
     public long getCPF() {
         return CPF;
     }
@@ -53,7 +50,7 @@ public class FormacaoAcademica {
     public String getInstituicao_Ensino() {
         return Instituicao_Ensino;
     }
-    
+
     public void setInstituicao_Ensino(String Instituicao_Ensino) {
         this.Instituicao_Ensino = Instituicao_Ensino;
     }
@@ -97,5 +94,5 @@ public class FormacaoAcademica {
     public void setDesc_Formacao_Academica(String Desc_Formacao_Academica) {
         this.Desc_Formacao_Academica = Desc_Formacao_Academica;
     }
-    
+
 }

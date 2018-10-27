@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.model.dao.FormacaoAcademicaDao;
@@ -24,17 +19,15 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
 
     @Override
     public void insert(FormacaoAcademica FormacaoAcademica) throws PersistenceException {
-        try {
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             Long Seq_FormacaoAcademica;
-                    
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
             String sql = "INSERT INTO FormacaoAcademica (CPF, Seq_Formacao, Instituicao_Ensino, Cod_Area_Estudo,"
                     + "Atividades_Desenvolvidas, Data_Inicio, Data_Termino, Desc_Formacao_Academica) "
                     + "VALUES(?,?,?,?,?,?,?,?) RETURNING Seq_FormacaoAcademica";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ps.setLong(1, FormacaoAcademica.getCPF());
             ps.setInt(2, FormacaoAcademica.getSeq_Formacao());
             ps.setString(3, FormacaoAcademica.getInstituicao_Ensino());
@@ -61,14 +54,13 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
 
     @Override
     public boolean update(long CPF, int Seq_Formacao, int Cod_Area_Estudo, FormacaoAcademica FormacaoAcademica) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-            
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+
             String SQL = "UPDATE FormacaoAcademica SET Seq_Formacao = ?, Instituicao_Ensino = ?, "
                     + "Cod_Area_Estudo = ? , Atividades_Desenvolvidas = ?, Data_Inicio = ?, "
                     + "Data_Termino = ?, Desc_Formacao_Academica = ?"
                     + "WHERE CPF = ?, Seq_Formacao = ?, Cod_Area_Estudo = ?";
-            
+
             PreparedStatement ps = connection.prepareStatement(SQL);
 
             ps.setInt(1, FormacaoAcademica.getSeq_Formacao());
@@ -81,7 +73,7 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
             ps.setLong(8, CPF);
             ps.setInt(9, Seq_Formacao);
             ps.setInt(10, Cod_Area_Estudo);
-            
+
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
@@ -94,18 +86,17 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
 
     @Override
     public boolean delete(long CPF, int Seq_Formacao, int Cod_Area_Estudo) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-            
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+
             String SQL = "DELETE FROM FormacaoAcademica"
                     + "WHERE CPF = ?, Seq_Formacao = ?, Cod_Area_Estudo = ?";
-            
+
             PreparedStatement ps = connection.prepareStatement(SQL);
-            
+
             ps.setLong(1, CPF);
             ps.setInt(2, Seq_Formacao);
             ps.setInt(3, Cod_Area_Estudo);
-            
+
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
@@ -115,12 +106,10 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
             return false;
         }
     }
-    
+
     @Override
     public List<FormacaoAcademica> getFormacaoAcademica(long CPF) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             String sql = "SELECT * FROM FormacaoAcademica WHERE CPF = ? ORDER BY Seq_Formacao;";
 
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -128,7 +117,7 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
             ResultSet rs = ps.executeQuery();
 
             List<FormacaoAcademica> FormAcad = new ArrayList<>();
-            
+
             if (rs.next()) {
                 do {
                     FormacaoAcademica Acad = new FormacaoAcademica();
@@ -157,21 +146,20 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
 
     @Override
     public FormacaoAcademica getFormacaoAcademicaCod(long CPF, int Seq_Formacao, int Cod_Area_Estudo) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM FormacaoAcademica WHERE CPF = ?, Seq_Formacao = ?, Cod_Area_Estudo = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ps.setLong(1, CPF);
             ps.setInt(2, Seq_Formacao);
             ps.setInt(3, Cod_Area_Estudo);
-            
+
             ResultSet rs = ps.executeQuery();
 
-           FormacaoAcademica Acad = new FormacaoAcademica();
-            
+            FormacaoAcademica Acad = new FormacaoAcademica();
+
             if (rs.next()) {
                 Acad.setCPF(rs.getLong("CPF"));
                 Acad.setSeq_Formacao(rs.getInt("Seq_Formacao"));
@@ -193,5 +181,5 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
             return null;
         }
     }
-    
+
 }

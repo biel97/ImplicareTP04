@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.domain;
 
 /**
@@ -10,18 +5,20 @@ package br.cefetmg.implicare.model.domain;
  * @author Gabriel
  */
 public class Cidade {
+
     private int Cod_Estado;
     private int Cod_Cidade;
     private String Nom_Cidade;
-    
-    public Cidade(){}
 
-    public Cidade(int Cod_Estado, int Cod_Cidade, String Nom_Cidade){
+    public Cidade() {
+    }
+
+    public Cidade(int Cod_Estado, int Cod_Cidade, String Nom_Cidade) {
         this.Cod_Estado = Cod_Estado;
         this.Cod_Cidade = Cod_Cidade;
         this.Nom_Cidade = Nom_Cidade;
     }
-    
+
     public int getCod_Estado() {
         return Cod_Estado;
     }
@@ -45,5 +42,5 @@ public class Cidade {
     public void setNom_Cidade(String Nom_Cidade) {
         this.Nom_Cidade = Nom_Cidade;
     }
-    
+
 }

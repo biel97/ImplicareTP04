@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.domain;
 
 /**
@@ -10,15 +5,17 @@ package br.cefetmg.implicare.model.domain;
  * @author Gabriel
  */
 public class Telefone {
+
     private long CPF_CNPJ;
     private String Num_Telefone;
     private String Tipo_Telefone;
     private int DDD;
     private int Ramal;
-    
-    public Telefone(){}
-    
-    public Telefone(long CPF_CNPJ, String Num_Telefone, String Tipo_Telefone, int DDD, int Ramal){
+
+    public Telefone() {
+    }
+
+    public Telefone(long CPF_CNPJ, String Num_Telefone, String Tipo_Telefone, int DDD, int Ramal) {
         this.CPF_CNPJ = CPF_CNPJ;
         this.Num_Telefone = Num_Telefone;
         this.Tipo_Telefone = Tipo_Telefone;
@@ -65,5 +62,5 @@ public class Telefone {
     public void setRamal(int Ramal) {
         this.Ramal = Ramal;
     }
-    
+
 }

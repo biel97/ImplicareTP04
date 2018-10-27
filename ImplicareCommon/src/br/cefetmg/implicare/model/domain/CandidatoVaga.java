@@ -1,35 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.domain;
 
 import java.sql.Date;
-
-
 
 /**
  *
  * @author Gabriel
  */
 public class CandidatoVaga {
+
     private long CPF;
     private int Cod_Cargo;
     private long CNPJ;
     private Date Dat_Publicacao;
     private String Status_Candidato;
-    
-    public CandidatoVaga(){}
 
-    public CandidatoVaga(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, String Status_Candidato){
+    public CandidatoVaga() {
+    }
+
+    public CandidatoVaga(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, String Status_Candidato) {
         this.CPF = CPF;
         this.Cod_Cargo = Cod_Cargo;
         this.CNPJ = CNPJ;
         this.Dat_Publicacao = Dat_Publicacao;
         this.Status_Candidato = Status_Candidato;
     }
-    
+
     public long getCPF() {
         return CPF;
     }
@@ -69,5 +64,5 @@ public class CandidatoVaga {
     public void setStatus_Candidato(String Status_Candidato) {
         this.Status_Candidato = Status_Candidato;
     }
-    
+
 }

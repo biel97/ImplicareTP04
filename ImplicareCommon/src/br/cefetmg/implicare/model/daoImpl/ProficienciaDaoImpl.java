@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.model.dao.ProficienciaDao;
@@ -33,7 +28,7 @@ public class ProficienciaDaoImpl implements ProficienciaDao {
             ResultSet rs = ps.executeQuery();
 
             List<Proficiencia> listAll = new ArrayList<>();
-            
+
             if (rs.next()) {
                 do {
                     Proficiencia Prof = new Proficiencia();
@@ -57,7 +52,7 @@ public class ProficienciaDaoImpl implements ProficienciaDao {
     @Override
     public Proficiencia getProficienciaCod(int Cod_Proficiencia) throws PersistenceException {
         try {
-           Connection connection = JDBCConnectionManager.getInstance().getConnection();
+            Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
             String sql = "SELECT * FROM Proficiencia WHERE Cod_Proficiencia = ?";
 
@@ -66,7 +61,7 @@ public class ProficienciaDaoImpl implements ProficienciaDao {
             ResultSet rs = ps.executeQuery();
 
             Proficiencia Prof = new Proficiencia();
-            
+
             if (rs.next()) {
                 Prof.setCod_Proficiencia(rs.getInt("Cod_Proficiencia"));
                 Prof.setNivel_Proficiencia(rs.getString("Nivel_Proficiencia"));
@@ -77,11 +72,11 @@ public class ProficienciaDaoImpl implements ProficienciaDao {
             connection.close();
 
             return Prof;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;
         }
     }
-    
+
 }
