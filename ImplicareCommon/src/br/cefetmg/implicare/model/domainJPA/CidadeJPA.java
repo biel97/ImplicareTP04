@@ -1,44 +1,61 @@
 package br.cefetmg.implicare.model.domainJPA;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+
 /**
  *
  * @author João Victor Bonfim
  */
+@Entity(name = "Cidade")
+@Table(name = "cidade")
+@IdClass(CidadeChave.class)
+public class CidadeJPA implements java.io.Serializable {
 
-//WIP
+    //Preciso que alguém faça a classe EstadoJPA para concluir a implementação.
+    @Id
+    @Column(name = "estado")
+    private int estado;
 
-public class CidadeJPA {
-    private int Cod_Estado;
-    private int Cod_Cidade;
-    private String Nom_Cidade;
+    @Id
+    @Column(name = "codCidade")
+    private int codCidade;
 
-    public CidadeJPA(int Cod_Estado, int Cod_Cidade, String Nom_Cidade){
-        this.Cod_Estado = Cod_Estado;
-        this.Cod_Cidade = Cod_Cidade;
-        this.Nom_Cidade = Nom_Cidade;
-    }
-    
-    public int getCod_Estado() {
-        return Cod_Estado;
-    }
+    private String nomCidade;
 
-    public void setCod_Estado(int Cod_Estado) {
-        this.Cod_Estado = Cod_Estado;
+    public CidadeJPA() {
     }
 
-    public int getCod_Cidade() {
-        return Cod_Cidade;
+    public CidadeJPA(int estado, int codCidade, String nomCidade) {
+        this.estado = estado;
+        this.codCidade = codCidade;
+        this.nomCidade = nomCidade;
     }
 
-    public void setCod_Cidade(int Cod_Cidade) {
-        this.Cod_Cidade = Cod_Cidade;
+    public int getEstado() {
+        return estado;
     }
 
-    public String getNom_Cidade() {
-        return Nom_Cidade;
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
-    public void setNom_Cidade(String Nom_Cidade) {
-        this.Nom_Cidade = Nom_Cidade;
+    public int getCodCidade() {
+        return codCidade;
+    }
+
+    public void setCodCidade(int codCidade) {
+        this.codCidade = codCidade;
+    }
+
+    public String getNomCidade() {
+        return nomCidade;
+    }
+
+    public void setNomCidade(String nomCidade) {
+        this.nomCidade = nomCidade;
     }
 }

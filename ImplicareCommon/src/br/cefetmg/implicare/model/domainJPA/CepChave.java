@@ -1,41 +1,42 @@
 package br.cefetmg.implicare.model.domainJPA;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
-
 /**
  *
  * @author João Victor Bonfim
  */
-//WIP
-@Entity(name = "CepChave")
-@Table(name = "cepchave")
-@IdClass(CepJPA.class)
-public class CepChave implements Serializable {
+public class CepChave implements java.io.Serializable {
 
-    @Id
-    @Column(name = "codCEP")
+    private CidadeJPA cidade;
+
     private long codCEP;
 
-    @Id
-    @Column(name = "codCidade")
-    private int codCidade;
+    public CepChave(CidadeJPA cidade, long codCEP) {
+        setCidade(cidade);
+        setCodCEP(codCEP);
+    }
 
-    @Id
-    @Column(name = "codEstado")
-    private int codEstado;
+    public CepChave() {
+    }
+
+    public CidadeJPA getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(CidadeJPA cidade) {
+        this.cidade = cidade;
+    }
+
+    public long getCodCEP() {
+        return codCEP;
+    }
+
+    public void setCodCEP(long codCEP) {
+        this.codCEP = codCEP;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + (int) (this.codCEP ^ (this.codCEP >>> 32));
-        hash = 83 * hash + this.codCidade;
-        hash = 83 * hash + this.codEstado;
-        return hash;
+        return java.util.Objects.hash(getCidade(), getCodCEP());
     }
 
     @Override
@@ -48,43 +49,9 @@ public class CepChave implements Serializable {
             return false;
         }
 
-        final CepChave other = (CepChave) o;
+        final CepChave objeto = (CepChave) o;
 
-        return this.codCEP == other.codCEP
-                && this.codCidade == other.codCidade
-                && this.codEstado == other.codEstado;
-    }
-
-    public CepChave(long codCEP, int codCidade, int codEstado) {
-        this.codCEP = codCEP;
-        this.codCidade = codCidade;
-        this.codEstado = codEstado;
-    }
-
-    public CepChave() {
-    }
-
-    public long getCodCEP() {
-        return codCEP;
-    }
-
-    public void setCodCEP(long codCEP) {
-        this.codCEP = codCEP;
-    }
-
-    public int getCodCidade() {
-        return codCidade;
-    }
-
-    public void setCodCidade(int codCidade) {
-        this.codCidade = codCidade;
-    }
-
-    public int getCodEstado() {
-        return codEstado;
-    }
-
-    public void setCodEstado(int codEstado) {
-        this.codEstado = codEstado;
+        return java.util.Objects.equals(getCidade(), objeto.getCidade())
+                && java.util.Objects.equals(getCodCEP(), objeto.getCodCEP());
     }
 }

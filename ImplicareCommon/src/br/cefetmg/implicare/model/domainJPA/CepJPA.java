@@ -1,47 +1,53 @@
 package br.cefetmg.implicare.model.domainJPA;
 
-import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author João Victor Bonfim
  */
-//Praticamente concluído.
-@Entity(name = "cep")
-public class CepJPA implements Serializable {
+@Entity(name = "CEP")
+@Table(name = "cep")
+@IdClass(CepChave.class)
+public class CepJPA implements java.io.Serializable {
 
     @Id
-    private CepChave chavePrimaria;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "codCidade")
+    private CidadeJPA cidade;
 
-    public CepJPA(){}
+    @Id
+    @Column(name = "codCEP")
+    private long codCEP;
 
-    public CepJPA(long codCEP, int codCidade, int codEstado) {
-        chavePrimaria = new CepChave(codCEP, codCidade, codEstado);
+    public CepJPA() {
+    }
+
+    public CepJPA(CidadeJPA cidade, long codCEP) {
+        this.cidade = cidade;
+        this.codCEP = codCEP;
     }
 
     public long getCodCEP() {
-        return chavePrimaria.getCodCEP();
+        return codCEP;
     }
 
     public void setCodCEP(long codCEP) {
-        chavePrimaria.setCodCEP(codCEP);
+        this.codCEP = codCEP;
     }
 
-    public int getCodCidade() {
-        return chavePrimaria.getCodCidade();
+    public CidadeJPA getCidade() {
+        return cidade;
     }
 
-    public void setCodCidade(int codCidade) {
-        chavePrimaria.setCodCidade(codCidade);
-    }
-
-    public int getCodEstado() {
-        return chavePrimaria.getCodEstado();
-    }
-
-    public void setCodEstado(int codEstado) {
-        chavePrimaria.setCodEstado(codEstado);
+    public void setCidade(CidadeJPA cidade) {
+        this.cidade = cidade;
     }
 }
