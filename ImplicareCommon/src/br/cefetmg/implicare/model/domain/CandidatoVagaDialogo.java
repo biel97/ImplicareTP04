@@ -1,19 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.domain;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-
 
 /**
  *
  * @author Gabriel
  */
 public class CandidatoVagaDialogo {
+
     private long CPF;
     private int Cod_Cargo;
     private long CNPJ;
@@ -21,10 +16,11 @@ public class CandidatoVagaDialogo {
     private Timestamp Dat_Dialogo;
     private String Txt_Dialogo;
     private String Idt_Empresa_Candidato;
-    
-    public CandidatoVagaDialogo(){}
 
-    public CandidatoVagaDialogo(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, Timestamp Dat_Dialogo, String Txt_Dialogo, String Idt_Empresa_Candidato){
+    public CandidatoVagaDialogo() {
+    }
+
+    public CandidatoVagaDialogo(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, Timestamp Dat_Dialogo, String Txt_Dialogo, String Idt_Empresa_Candidato) {
         this.CPF = CPF;
         this.Cod_Cargo = Cod_Cargo;
         this.CNPJ = CNPJ;
@@ -33,7 +29,7 @@ public class CandidatoVagaDialogo {
         this.Txt_Dialogo = Txt_Dialogo;
         this.Idt_Empresa_Candidato = Idt_Empresa_Candidato;
     }
-    
+
     public long getCPF() {
         return CPF;
     }
@@ -89,5 +85,5 @@ public class CandidatoVagaDialogo {
     public void setIdt_Empresa_Candidato(String Idt_Empresa_Candidato) {
         this.Idt_Empresa_Candidato = Idt_Empresa_Candidato;
     }
-    
+
 }

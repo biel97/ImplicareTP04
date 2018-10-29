@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.model.dao.CargoAreaEstudoDao;
@@ -26,18 +21,17 @@ public class CargoAreaEstudoDaoImpl implements CargoAreaEstudoDao {
 
     @Override
     public Set<CargoAreaEstudo> CargoAreaEstudo(List<FormacaoAcademica> FormAcad) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             Set<CargoAreaEstudo> CargoArea = new HashSet<>();
-            
+
             for (FormacaoAcademica Form : FormAcad) {
                 String sql = "SELECT * FROM CompetenciaPessoaFisica WHERE Cod_Area_Estudo = ? ORDER BY Cod_Cargo";
-                
+
                 PreparedStatement ps = connection.prepareStatement(sql);
                 ps.setInt(1, Form.getCod_Area_Estudo());
                 ResultSet rs = ps.executeQuery();
-                
+
                 if (rs.next()) {
                     do {
                         CargoAreaEstudo Cargo = new CargoAreaEstudo();
@@ -47,11 +41,11 @@ public class CargoAreaEstudoDaoImpl implements CargoAreaEstudoDao {
                         CargoArea.add(Cargo);
                     } while (rs.next());
                 }
-                
+
                 rs.close();
                 ps.close();
             }
-            
+
             connection.close();
 
             return CargoArea;
@@ -60,5 +54,4 @@ public class CargoAreaEstudoDaoImpl implements CargoAreaEstudoDao {
             return null;
         }
     }
-    
 }

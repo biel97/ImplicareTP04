@@ -1,18 +1,16 @@
-package br.cefetmg.implicare.model.domain;
+package br.cefetmg.implicare.model.domainJPA;
 
 /**
  *
- * @author Gabriel
+ * @author João Victor Bonfim
+ * @deprecated Usar as propriedades nativas do JPA ao invés desta classe.
  */
-public class CargoInteresse {
-
+public class CargoInteresseJPA {
+    
     private long CPF;
     private int Cod_Cargo;
-
-    public CargoInteresse() {
-    }
-
-    public CargoInteresse(long CPF, int Cod_Cargo) {
+    
+    public CargoInteresseJPA(long CPF, int Cod_Cargo){
         this.CPF = CPF;
         this.Cod_Cargo = Cod_Cargo;
     }
@@ -32,5 +30,4 @@ public class CargoInteresse {
     public void setCod_Cargo(int Cod_Cargo) {
         this.Cod_Cargo = Cod_Cargo;
     }
-
 }

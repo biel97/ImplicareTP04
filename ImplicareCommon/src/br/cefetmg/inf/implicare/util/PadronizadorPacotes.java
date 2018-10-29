@@ -22,13 +22,13 @@ public class PadronizadorPacotes {
             for (int i = 0; i < numPacotes; i++) {
                 pacotes[i][0] = String.valueOf(i).getBytes()[0];
                 for (int j = 0; j < 1024; j++) {
-                    
+
                     if (i == numPacotes - 1 && j == tamUltimoPacote) {
                         break;
                     }
-                    
-                    pacotes[i][j+1] = pacoteBytes[j + (1024*i)];
-                    
+
+                    pacotes[i][j + 1] = pacoteBytes[j + (1024 * i)];
+
                 }
                 byte aux = String.valueOf(i).getBytes()[0];
             }
@@ -37,9 +37,9 @@ public class PadronizadorPacotes {
             for (int i = 0; i < numPacotes; i++) {
 
                 for (int j = 0; j < 1025; j++) {
-                    pacotes[i][j] = pacoteBytes[j + (1024*i)];
+                    pacotes[i][j] = pacoteBytes[j + (1024 * i)];
                 }
-                
+
                 pacotes[i][0] = String.valueOf(i).getBytes()[0];
                 pacotes[i][1] = String.valueOf(i).getBytes()[1];
 
@@ -49,13 +49,13 @@ public class PadronizadorPacotes {
             for (int i = 0; i < numPacotes; i++) {
 
                 for (int j = 0; j < 1026; j++) {
-                    pacotes[i][j] = pacoteBytes[j + (1024*i)];
+                    pacotes[i][j] = pacoteBytes[j + (1024 * i)];
                 }
-                
+
                 pacotes[i][0] = String.valueOf(i).getBytes()[0];
                 pacotes[i][1] = String.valueOf(i).getBytes()[1];
                 pacotes[i][2] = String.valueOf(i).getBytes()[2];
-                
+
             }
         }
         return pacotes;

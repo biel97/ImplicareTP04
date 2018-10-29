@@ -1,22 +1,31 @@
-package br.cefetmg.implicare.model.domain;
+package br.cefetmg.implicare.model.domainJPA;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
 
 /**
  *
  * @author Gabriel
+ * 
  */
-public class AreaEstudo {
 
+public class AreaEstudoJPA {
+    
+    @Id
+    @Column(name="Cod_Area_Estudo", nullable = false)
     private int Cod_Area_Estudo;
+    
+    @Column(name="Nom_Area_Estudo", nullable = false)
     private String Nom_Area_Estudo;
 
-    public AreaEstudo() {
+    public AreaEstudoJPA() {
     }
 
-    public AreaEstudo(int Cod_Area_Estudo, String Nom_Area_Estudo) {
+    public AreaEstudoJPA(int Cod_Area_Estudo, String Nom_Area_Estudo) {
         this.Cod_Area_Estudo = Cod_Area_Estudo;
         this.Nom_Area_Estudo = Nom_Area_Estudo;
     }
-
+    
     public int getCod_Area_Estudo() {
         return Cod_Area_Estudo;
     }
@@ -32,5 +41,5 @@ public class AreaEstudo {
     public void setNom_Area_Estudo(String Nom_Area_Estudo) {
         this.Nom_Area_Estudo = Nom_Area_Estudo;
     }
-
+    
 }

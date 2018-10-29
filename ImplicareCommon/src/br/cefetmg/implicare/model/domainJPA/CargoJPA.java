@@ -1,22 +1,31 @@
-package br.cefetmg.implicare.model.domain;
+package br.cefetmg.implicare.model.domainJPA;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
 
 /**
  *
  * @author Gabriel
+ * 
  */
-public class Cargo {
 
+public class CargoJPA {
+    
+    @Id
+    @Column(name="Cod_Cargo", nullable = false)
     private int Cod_Cargo;
+    
+    @Column(name="Nom_Cargo", nullable = false)
     private String Nom_Cargo;
 
-    public Cargo() {
+    public CargoJPA() {
     }
 
-    public Cargo(int Cod_Cargo, String Nom_Cargo) {
+    public CargoJPA(int Cod_Cargo, String Nom_Cargo) {
         this.Cod_Cargo = Cod_Cargo;
         this.Nom_Cargo = Nom_Cargo;
     }
-
+    
     public int getCod_Cargo() {
         return Cod_Cargo;
     }
@@ -32,5 +41,5 @@ public class Cargo {
     public void setNom_Cargo(String Nom_Cargo) {
         this.Nom_Cargo = Nom_Cargo;
     }
-
+    
 }

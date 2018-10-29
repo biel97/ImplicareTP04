@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.model.dao.ExperienciaProfissionalDao;
@@ -10,13 +5,11 @@ import br.cefetmg.implicare.model.domain.ExperienciaProfissional;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  *
@@ -26,17 +19,15 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
 
     @Override
     public void insert(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
-        try {
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             Long Seq_CompetenciaPessoaFisica;
-                    
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
             String sql = "INSERT INTO ExperienciaProfissional (CPF, Seq_Experiencia, Nom_Empresa, Cod_Cargo, "
                     + "Cod_Cep, Data_Inicio, Data_Termino, Desc_Experiencia_Profissional, Cod_Cidade, Cod_Estado) "
                     + "VALUES(?,?,?,?,?,?,?,?,?,?) RETURNING Seq_ExperienciaProfissional";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ps.setLong(1, ExperienciaProfissional.getCPF());
             ps.setInt(2, ExperienciaProfissional.getSeq_Experiencia());
             ps.setString(3, ExperienciaProfissional.getNom_Empresa());
@@ -47,7 +38,7 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
             ps.setString(8, ExperienciaProfissional.getDesc_Experiencia_Profissional());
             ps.setLong(9, ExperienciaProfissional.getCod_Cidade());
             ps.setLong(10, ExperienciaProfissional.getCod_Estado());
-            
+
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -65,14 +56,13 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
 
     @Override
     public boolean update(Long CPF, int Seq_Experiencia, int Cod_Cargo, ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-            
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+
             String SQL = "UPDATE ExperienciaProfissional SET Nom_Empresa = ?, Cod_Cargo = ?, "
                     + "Cod_Cep = ?, Data_Inicio = ?, Data_Termino = ?, "
                     + "Desc_Experiencia_Profissional = ?, Cod_Cidade = ?, Cod_Estado = ?"
                     + "WHERE CPF = ?, Seq_Experiencia = ?, Cod_Cargo = ?";
-            
+
             PreparedStatement ps = connection.prepareStatement(SQL);
 
             ps.setString(1, ExperienciaProfissional.getNom_Empresa());
@@ -86,7 +76,7 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
             ps.setLong(8, CPF);
             ps.setInt(9, Seq_Experiencia);
             ps.setInt(10, Cod_Cargo);
-            
+
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
@@ -99,18 +89,17 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
 
     @Override
     public boolean delete(Long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-            
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+
             String SQL = "DELETE FROM ExperienciaProfissional"
                     + "WHERE CPF = ?, Seq_Experiencia = ?, Cod_Cargo = ?";
-            
+
             PreparedStatement ps = connection.prepareStatement(SQL);
-            
+
             ps.setLong(1, CPF);
             ps.setInt(2, Seq_Experiencia);
             ps.setInt(3, Cod_Cargo);
-            
+
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
@@ -123,8 +112,7 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
 
     @Override
     public List<ExperienciaProfissional> getExperienciasProfissionais(Long CPF) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM ExperienciaProfissional WHERE CPF = ? ORDER BY Seq_Experiencia;";
 
@@ -133,11 +121,11 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
             ResultSet rs = ps.executeQuery();
 
             List<ExperienciaProfissional> ExpProfissional = new ArrayList<>();
-            
+
             if (rs.next()) {
                 do {
                     ExperienciaProfissional Exp = new ExperienciaProfissional();
-                    
+
                     Exp.setCPF(rs.getLong("CPF"));
                     Exp.setSeq_Experiencia(rs.getInt("Seq_Experiencia"));
                     Exp.setNom_Empresa(rs.getString("Nom_Empresa"));
@@ -148,7 +136,7 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
                     Exp.setDesc_Experiencia_Profissional(rs.getString("Desc_Experiencia_Profissional"));
                     Exp.setCod_Cidade(rs.getLong("Cod_Cidade"));
                     Exp.setCod_Estado(rs.getLong("Cod_Estado"));
-                   
+
                     ExpProfissional.add(Exp);
                 } while (rs.next());
             }
@@ -166,21 +154,19 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
 
     @Override
     public ExperienciaProfissional getExperienciaProfissionalCod(Long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             String sql = "SELECT * FROM ExperienciaProfissional WHERE CPF = ?, Seq_Experiencia = ?, Cod_Cargo = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ps.setLong(1, CPF);
             ps.setInt(2, Seq_Experiencia);
             ps.setInt(3, Cod_Cargo);
-            
+
             ResultSet rs = ps.executeQuery();
 
             ExperienciaProfissional Exp = new ExperienciaProfissional();
-            
+
             if (rs.next()) {
                 Exp.setCPF(rs.getLong("CPF"));
                 Exp.setSeq_Experiencia(rs.getInt("Seq_Experiencia"));
