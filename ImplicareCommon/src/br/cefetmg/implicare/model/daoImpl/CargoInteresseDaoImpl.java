@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.model.dao.CargoInteresseDao;
@@ -16,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author Gabriel
@@ -25,19 +19,17 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
 
     @Override
     public void insert(CargoInteresse CargoInteresse) throws PersistenceException {
-        try {
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             Long Seq_CargoInteresse;
-                    
-           Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
             String sql = "INSERT INTO CargoInteresse (CPF, Cod_Cargo) "
                     + "VALUES(?,?) RETURNING Seq_CargoInteresse";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-           
+
             ps.setLong(1, CargoInteresse.getCPF());
             ps.setInt(2, CargoInteresse.getCod_Cargo());
-            
+
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -55,17 +47,16 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
 
     @Override
     public boolean delete(long CPF, int Cod_Cargo) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-            
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+
             String SQL = "DELETE FROM CargoInteresse"
                     + "WHERE CPF = ?, Cod_Cargo = ?";
-            
+
             PreparedStatement ps = connection.prepareStatement(SQL);
-            
+
             ps.setLong(1, CPF);
             ps.setInt(2, Cod_Cargo);
-            
+
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
@@ -78,8 +69,7 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
 
     @Override
     public List<CargoInteresse> getCargosInteresse(long CPF) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM CargoInteresse WHERE CPF = ? ORDER BY Cod_Cargo";
 
@@ -88,7 +78,7 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
             ResultSet rs = ps.executeQuery();
 
             List<CargoInteresse> CargoInt = new ArrayList<>();
-            
+
             if (rs.next()) {
                 do {
                     CargoInteresse Car = new CargoInteresse();
@@ -111,8 +101,7 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
 
     @Override
     public CargoInteresse getCargoInteresseCod(long CPF, int Cod_Cargo) throws PersistenceException {
-        try {
-           Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM CargoInteresse WHERE CPF = ?, Cod_Cargo = ?";
 
@@ -122,7 +111,7 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
             ResultSet rs = ps.executeQuery();
 
             CargoInteresse CarInteresse = new CargoInteresse();
-            
+
             if (rs.next()) {
                 CarInteresse.setCPF(rs.getLong("CPF"));
                 CarInteresse.setCod_Cargo(rs.getInt("Cod_Cargo"));
@@ -133,11 +122,10 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
             connection.close();
 
             return CarInteresse;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;
         }
     }
-    
 }

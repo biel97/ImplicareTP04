@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.model.dao.UsuarioDao;
@@ -18,13 +13,13 @@ import java.sql.SQLException;
  *
  * @author Gabriel
  */
-public class UsuarioDaoImpl implements UsuarioDao{
+public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public void insert(Usuario Usuario) throws PersistenceException {
         try {
             Long Seq_Usuario;
-                    
+
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
             String sql = "INSERT INTO Usuario (CPF_CNPJ, Email, Senha, Foto,"
@@ -32,7 +27,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
                     + "VALUES(?,?,?,?,?,?,?) RETURNING Seq_Usuario";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ps.setLong(1, Usuario.getCPF_CNPJ());
             ps.setString(2, Usuario.getEmail());
             ps.setString(3, Usuario.getSenha());
@@ -40,8 +35,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
             ps.setLong(5, Usuario.getCod_CEP());
             ps.setString(6, Usuario.getEndereco());
             ps.setString(7, Usuario.getDesc_Usuario());
-            
-            
+
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -59,15 +53,15 @@ public class UsuarioDaoImpl implements UsuarioDao{
 
     @Override
     public boolean update(Long CPF_CNPJ, Usuario Usuario) throws PersistenceException {
-       try {
+        try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
-            
+
             String SQL = "UPDATE Usuario SET Email = ?, Senha = ?, Foto = ?, "
                     + "Cod_CEP, Endereco = ?, Desc_Usuario = ? "
                     + "WHERE CPF_CNPJ = ?";
-            
+
             PreparedStatement ps = connection.prepareStatement(SQL);
-       
+
             ps.setString(1, Usuario.getEmail());
             ps.setString(2, Usuario.getSenha());
             ps.setString(2, Usuario.getFoto());
@@ -75,12 +69,12 @@ public class UsuarioDaoImpl implements UsuarioDao{
             ps.setString(5, Usuario.getEndereco());
             ps.setString(6, Usuario.getDesc_Usuario());
             ps.setLong(7, CPF_CNPJ);
-            
+
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
             return true;
-            
+
         } catch (Exception ex) {
             System.out.println(ex.toString());
             return false;
@@ -99,7 +93,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
             ResultSet rs = ps.executeQuery();
 
             Usuario User = new Usuario();
-            
+
             if (rs.next()) {
                 User.setCPF_CNPJ(rs.getLong("CPF_CNPJ"));
                 User.setEmail(rs.getString("Email"));
@@ -114,7 +108,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
             connection.close();
 
             return User;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;
@@ -129,14 +123,14 @@ public class UsuarioDaoImpl implements UsuarioDao{
             String sql = "SELECT * FROM Usuario WHERE CPF_CNPJ = ? AND Senha = md5(?)";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ps.setLong(1, CPF_CNPJ);
             ps.setString(2, Senha);
-            
+
             ResultSet rs = ps.executeQuery();
 
             Usuario User = null;
-            
+
             if (rs.next()) {
                 User = new Usuario();
                 User.setCPF_CNPJ(rs.getLong("CPF_CNPJ"));
@@ -158,5 +152,5 @@ public class UsuarioDaoImpl implements UsuarioDao{
             return null;
         }
     }
-    
+
 }

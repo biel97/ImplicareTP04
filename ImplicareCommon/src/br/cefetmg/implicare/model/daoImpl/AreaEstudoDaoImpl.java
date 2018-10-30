@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.model.dao.AreaEstudoDao;
@@ -14,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -24,8 +18,7 @@ public class AreaEstudoDaoImpl implements AreaEstudoDao {
 
     @Override
     public ArrayList<AreaEstudo> listAll() throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM AreaEstudo ORDER BY Nom_Area_Estudo;";
 
@@ -33,7 +26,7 @@ public class AreaEstudoDaoImpl implements AreaEstudoDao {
             ResultSet rs = ps.executeQuery();
 
             ArrayList<AreaEstudo> listAll = new ArrayList<>();
-            
+
             if (rs.next()) {
                 do {
                     AreaEstudo Area = new AreaEstudo();
@@ -56,8 +49,7 @@ public class AreaEstudoDaoImpl implements AreaEstudoDao {
 
     @Override
     public AreaEstudo getAreaEstudoCod(int Cod_Area_Estudo) throws PersistenceException {
-        try {
-           Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM AreaEstudo WHERE Cod_Area_Estudo = ?";
 
@@ -66,7 +58,7 @@ public class AreaEstudoDaoImpl implements AreaEstudoDao {
             ResultSet rs = ps.executeQuery();
 
             AreaEstudo Area = new AreaEstudo();
-            
+
             if (rs.next()) {
                 Area.setCod_Area_Estudo(rs.getInt("Cod_Area_Estudo"));
                 Area.setNom_Area_Estudo(rs.getString("Nom_Area_Estudo"));
@@ -77,11 +69,10 @@ public class AreaEstudoDaoImpl implements AreaEstudoDao {
             connection.close();
 
             return Area;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;
         }
     }
-    
 }
