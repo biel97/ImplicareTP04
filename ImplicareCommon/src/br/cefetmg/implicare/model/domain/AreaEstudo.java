@@ -1,13 +1,30 @@
 package br.cefetmg.implicare.model.domain;
 
+
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 /**
  *
  * @author Gabriel
  */
-public class AreaEstudo {
-
+@Entity(name="AreaEstudo")
+public class AreaEstudo implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cod_area_estudo")
     private int Cod_Area_Estudo;
+    
+    @ManyToOne
+    @Column(name = "nom_area_estudo")
     private String Nom_Area_Estudo;
+    
 
     public AreaEstudo() {
     }
