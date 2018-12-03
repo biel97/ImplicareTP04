@@ -2,6 +2,7 @@ package br.cefetmg.implicare.model.dao;
 
 import br.cefetmg.implicare.model.domain.Competencia;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @author Gabriel
  */
-public interface CompetenciaDao {
+public interface CompetenciaDao extends Remote {
 
     public List<Competencia> listAll() throws PersistenceException, RemoteException;
 

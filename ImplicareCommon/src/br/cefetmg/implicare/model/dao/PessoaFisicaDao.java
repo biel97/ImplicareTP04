@@ -2,13 +2,14 @@ package br.cefetmg.implicare.model.dao;
 
 import br.cefetmg.implicare.model.domain.PessoaFisica;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
  *
  * @author Gabriel
  */
-public interface PessoaFisicaDao {
+public interface PessoaFisicaDao extends Remote {
 
     public void insert(PessoaFisica PessoaFisica) throws PersistenceException, RemoteException;
 

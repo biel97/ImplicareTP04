@@ -13,6 +13,7 @@ import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CargoAreaEstudoManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.Set;
 
@@ -20,10 +21,10 @@ import java.util.Set;
  *
  * @author Gabriel
  */
-public class CargoAreaEstudoMangementImpl implements CargoAreaEstudoManagement {
+public class CargoAreaEstudoMangementImpl extends UnicastRemoteObject implements CargoAreaEstudoManagement {
     private final CargoAreaEstudoDao CargoAreaEstudoDao;
     
-    public CargoAreaEstudoMangementImpl(){
+    public CargoAreaEstudoMangementImpl() throws RemoteException {
         CargoAreaEstudoDao = new CargoAreaEstudoDaoImpl();
     }
     

@@ -9,6 +9,7 @@ import br.cefetmg.implicare.model.domain.CargoInteresse;
 import br.cefetmg.implicare.model.domain.Vaga;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
  * @author Gabriel
  * 
  */
-public interface VagaManagement {
+public interface VagaManagement extends Remote {
     public void insert(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException;
     public boolean update(long CNPJ, int Cod_Cargo, Date Dat_Publicacao,Vaga Vaga) throws BusinessException, PersistenceException, RemoteException;
     public boolean delete(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException, RemoteException;

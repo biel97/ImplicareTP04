@@ -2,6 +2,7 @@ package br.cefetmg.implicare.model.dao;
 
 import br.cefetmg.implicare.model.domain.Telefone;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @author Gabriel
  */
-public interface TelefoneDao {
+public interface TelefoneDao extends Remote {
 
     public void insert(Telefone Telefone) throws PersistenceException, RemoteException;
 

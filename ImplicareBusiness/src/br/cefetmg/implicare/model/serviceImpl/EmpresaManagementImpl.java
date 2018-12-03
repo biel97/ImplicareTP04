@@ -12,15 +12,16 @@ import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.EmpresaManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
  * @author Gabriel
  */
-public class EmpresaManagementImpl implements EmpresaManagement {
+public class EmpresaManagementImpl extends UnicastRemoteObject implements EmpresaManagement {
     private final EmpresaDao EmpresaDao;
     
-    public EmpresaManagementImpl(){
+    public EmpresaManagementImpl() throws RemoteException {
         EmpresaDao = new EmpresaDaoImpl(); 
     }
     

@@ -8,13 +8,14 @@ package br.cefetmg.implicare.model.service;
 import br.cefetmg.implicare.model.domain.Empresa;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
  *
  * @author Gabriel
  */
-public interface EmpresaManagement {
+public interface EmpresaManagement extends Remote {
     public void insert(Empresa Empresa) throws BusinessException, PersistenceException, RemoteException;
     public boolean update(Long CNPJ,Empresa Empresa) throws BusinessException, PersistenceException, RemoteException;
     public Empresa getEmpresaCod(Long CNPJ) throws PersistenceException, RemoteException;

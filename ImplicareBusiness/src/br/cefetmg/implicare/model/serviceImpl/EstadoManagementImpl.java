@@ -11,16 +11,17 @@ import br.cefetmg.implicare.model.domain.Estado;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.EstadoManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 /**
  *
  * @author Gabriel
  */
-public class EstadoManagementImpl implements EstadoManagement {
+public class EstadoManagementImpl extends UnicastRemoteObject implements EstadoManagement {
     private final EstadoDao EstadoDao;
     
-    public EstadoManagementImpl(){
+    public EstadoManagementImpl() throws RemoteException {
         EstadoDao = new EstadoDaoImpl();
     }
     

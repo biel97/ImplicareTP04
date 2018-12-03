@@ -12,16 +12,17 @@ import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.ExperienciaProfissionalManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 /**
  *
  * @author Gabriel
  */
-public class ExperienciaProfissionalManagementImpl implements ExperienciaProfissionalManagement {
+public class ExperienciaProfissionalManagementImpl extends UnicastRemoteObject implements ExperienciaProfissionalManagement {
     private final ExperienciaProfissionalDao ExperienciaProfissionalDao;
     
-    public ExperienciaProfissionalManagementImpl(){
+    public ExperienciaProfissionalManagementImpl() throws RemoteException {
         ExperienciaProfissionalDao = new ExperienciaProfissionalDaoImpl();
     }
     

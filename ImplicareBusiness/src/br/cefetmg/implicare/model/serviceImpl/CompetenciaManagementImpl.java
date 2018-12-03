@@ -11,16 +11,17 @@ import br.cefetmg.implicare.model.domain.Competencia;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CompetenciaManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 /**
  *
  * @author Gabriel
  */
-public class CompetenciaManagementImpl implements CompetenciaManagement {
+public class CompetenciaManagementImpl extends UnicastRemoteObject implements CompetenciaManagement {
     private final CompetenciaDao CompetenciaDao;
     
-    public CompetenciaManagementImpl(){
+    public CompetenciaManagementImpl() throws RemoteException {
         CompetenciaDao = new CompetenciaDaoImpl();
     }
     
