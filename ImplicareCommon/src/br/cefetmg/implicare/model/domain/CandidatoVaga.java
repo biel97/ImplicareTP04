@@ -15,13 +15,18 @@ import javax.persistence.ManyToOne;
  * @author Gabriel
  */
 @Entity(name="CandidatoVaga")
-public class CandidatoVaga {
-
-    private long CPF;
-    private int Cod_Cargo;
-    private long CNPJ;
-    private Date Dat_Publicacao;
+public class CandidatoVaga implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cpf")
+    private Long CPF;
     private String Status_Candidato;
+    @Column(name = "cod_cargo")
+    private int Cod_Cargo;
+    @Column(name = "cnpj")
+    private long CNPJ;
+    @Column(name = "dat_publicacao")
+    private Date Dat_Publicacao;
 
     public CandidatoVaga() {
     }

@@ -16,15 +16,20 @@ import javax.persistence.ManyToOne;
  * @author Gabriel
  */
 @Entity(name="CandidatoVagaDialogo")
-public class CandidatoVagaDialogo {
-
-    private long CPF;
+public class CandidatoVagaDialogo implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cpf")
+    private Long CPF;
+    private String Idt_Empresa_Candidato;
+    @Column(name = "cod_cargo")
     private int Cod_Cargo;
-    private long CNPJ;
-    private Date Dat_Publicacao;
     private Timestamp Dat_Dialogo;
     private String Txt_Dialogo;
-    private String Idt_Empresa_Candidato;
+    @Column(name = "cnpj")
+    private long CNPJ;
+    @Column(name = "dat_publicacao")
+    private Date Dat_Publicacao;
 
     public CandidatoVagaDialogo() {
     }

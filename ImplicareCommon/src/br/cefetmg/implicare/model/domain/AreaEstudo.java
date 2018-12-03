@@ -21,7 +21,6 @@ public class AreaEstudo implements Serializable{
     @Column(name = "cod_area_estudo")
     private int Cod_Area_Estudo;
     
-    @ManyToOne
     @Column(name = "nom_area_estudo")
     private String Nom_Area_Estudo;
     
