@@ -3,6 +3,7 @@ package br.cefetmg.implicare.model.dao;
 import br.cefetmg.implicare.model.domain.CargoInteresse;
 import br.cefetmg.implicare.model.domain.Vaga;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @author Gabriel
  */
-public interface VagaDao {
+public interface VagaDao extends Remote {
 
     public void insert(Vaga Vaga) throws PersistenceException, RemoteException;
 

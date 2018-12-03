@@ -2,6 +2,7 @@ package br.cefetmg.implicare.model.dao;
 
 import br.cefetmg.implicare.model.domain.CandidatoVaga;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  *
  * @author Gabriel
  */
-public interface CandidatoVagaDao {
+public interface CandidatoVagaDao extends Remote {
 
     public void insert(CandidatoVaga CandidatoVaga) throws PersistenceException, RemoteException;
 
