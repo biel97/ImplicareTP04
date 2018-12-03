@@ -12,16 +12,17 @@ import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.FormacaoAcademicaManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 /**
  *
  * @author Gabriel
  */
-public class FormacaoAcademicaManagementImpl implements FormacaoAcademicaManagement {
+public class FormacaoAcademicaManagementImpl extends UnicastRemoteObject implements FormacaoAcademicaManagement {
     private final FormacaoAcademicaDao FormacaoAcademicaDao;
     
-    public FormacaoAcademicaManagementImpl(){
+    public FormacaoAcademicaManagementImpl() throws RemoteException {
         FormacaoAcademicaDao = new FormacaoAcademicaDaoImpl();
     }
 

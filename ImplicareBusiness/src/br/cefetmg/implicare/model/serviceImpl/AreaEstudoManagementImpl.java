@@ -11,16 +11,17 @@ import br.cefetmg.implicare.model.domain.AreaEstudo;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.AreaEstudoManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 /**
  *
  * @author Gabriel
  */
-public class AreaEstudoManagementImpl implements AreaEstudoManagement {
+public class AreaEstudoManagementImpl extends UnicastRemoteObject implements AreaEstudoManagement {
     private final AreaEstudoDao AreaEstudoDao;
     
-    public AreaEstudoManagementImpl(){
+    public AreaEstudoManagementImpl() throws RemoteException {
         AreaEstudoDao = new AreaEstudoDaoImpl();
     }
     

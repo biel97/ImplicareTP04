@@ -12,16 +12,17 @@ import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.TelefoneManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 /**
  *
  * @author Gabriel
  */
-public class TelefoneManagementImpl implements TelefoneManagement {
+public class TelefoneManagementImpl extends UnicastRemoteObject implements TelefoneManagement {
     private final TelefoneDao TelefoneDao;
     
-    public TelefoneManagementImpl(){
+    public TelefoneManagementImpl() throws RemoteException {
         TelefoneDao = new TelefoneDaoImpl();
     }
     

@@ -12,16 +12,17 @@ import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CargoInteresseManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 /**
  *
  * @author Gabriel
  */
-public class CargoInteresseManagementImpl implements CargoInteresseManagement {
+public class CargoInteresseManagementImpl extends UnicastRemoteObject implements CargoInteresseManagement {
     private final CargoInteresseDao CargoInteresseDao;
     
-    public CargoInteresseManagementImpl(){
+    public CargoInteresseManagementImpl() throws RemoteException {
         CargoInteresseDao = new CargoInteresseDaoImpl();
     }
     

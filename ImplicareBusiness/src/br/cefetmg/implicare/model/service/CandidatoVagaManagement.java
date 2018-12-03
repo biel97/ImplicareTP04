@@ -8,6 +8,7 @@ package br.cefetmg.implicare.model.service;
 import br.cefetmg.implicare.model.domain.CandidatoVaga;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
  * @author Andre Matheus
  * @author Gabriel
  */
-public interface CandidatoVagaManagement {
+public interface CandidatoVagaManagement extends Remote {
     public void insert(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException, RemoteException;
     public boolean update(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException, RemoteException;
     public List<CandidatoVaga> getCandidatosVaga(int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException, RemoteException;

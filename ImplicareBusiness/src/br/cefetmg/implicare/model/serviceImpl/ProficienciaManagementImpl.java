@@ -11,16 +11,17 @@ import br.cefetmg.implicare.model.domain.Proficiencia;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.ProficienciaManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 /**
  *
  * @author Gabriel
  */
-public class ProficienciaManagementImpl implements ProficienciaManagement {
+public class ProficienciaManagementImpl extends UnicastRemoteObject implements ProficienciaManagement {
     private final ProficienciaDao ProficienciaDao;
     
-    public ProficienciaManagementImpl(){
+    public ProficienciaManagementImpl() throws RemoteException {
         ProficienciaDao = new ProficienciaDaoImpl();
     }
     

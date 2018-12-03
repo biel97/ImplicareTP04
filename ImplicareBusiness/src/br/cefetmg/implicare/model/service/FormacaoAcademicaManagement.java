@@ -8,6 +8,7 @@ package br.cefetmg.implicare.model.service;
 import br.cefetmg.implicare.model.domain.FormacaoAcademica;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * @author Gabriel
  * 
  */
-public interface FormacaoAcademicaManagement {
+public interface FormacaoAcademicaManagement extends Remote {
     public void insert(FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException, RemoteException;
     public boolean update(long CPF, int Seq_Formacao, int Cod_Area_Estudo, FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException, RemoteException;
     public boolean delete(long CPF, int Seq_Formacao, int Cod_Area_Estudo) throws PersistenceException, RemoteException;

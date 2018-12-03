@@ -11,16 +11,17 @@ import br.cefetmg.implicare.model.domain.Cidade;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CidadeManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 /**
  *
  * @author Gabriel
  */
-public class CidadeManagementImpl implements CidadeManagement {
+public class CidadeManagementImpl extends UnicastRemoteObject implements CidadeManagement {
     private final CidadeDao CidadeDao;
     
-    public CidadeManagementImpl(){
+    public CidadeManagementImpl() throws RemoteException {
         CidadeDao = new CidadeDaoImpl();
     }
     
