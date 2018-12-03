@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.TelefoneDao;
 import br.cefetmg.implicare.model.domain.Telefone;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ import java.util.List;
 public class TelefoneDaoImpl implements TelefoneDao {
 
     @Override
-    public void insert(Telefone Telefone) throws PersistenceException {
+    public void insert(Telefone Telefone) throws PersistenceException, RemoteException {
         try {
             Long Seq_Telefone;
 
@@ -49,7 +50,7 @@ public class TelefoneDaoImpl implements TelefoneDao {
     }
 
     @Override
-    public boolean update(long CPF_CNPJ, String Num_Telefone, Telefone Telefone) throws PersistenceException {
+    public boolean update(long CPF_CNPJ, String Num_Telefone, Telefone Telefone) throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
@@ -77,7 +78,7 @@ public class TelefoneDaoImpl implements TelefoneDao {
     }
 
     @Override
-    public boolean delete(long CPF_CNPJ, String Num_Telefone) throws PersistenceException {
+    public boolean delete(long CPF_CNPJ, String Num_Telefone) throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
@@ -100,7 +101,7 @@ public class TelefoneDaoImpl implements TelefoneDao {
     }
 
     @Override
-    public List<Telefone> getTelefones(long CPF_CNPJ) throws PersistenceException {
+    public List<Telefone> getTelefones(long CPF_CNPJ) throws PersistenceException, RemoteException {
         List<Telefone> ListTel;
         ListTel = null;
         Telefone Tel = new Telefone();
@@ -135,7 +136,7 @@ public class TelefoneDaoImpl implements TelefoneDao {
     }
 
     @Override
-    public Telefone getTelefoneCod(long CPF_CNPJ, String Num_Telefone) throws PersistenceException {
+    public Telefone getTelefoneCod(long CPF_CNPJ, String Num_Telefone) throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 

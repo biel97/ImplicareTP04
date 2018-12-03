@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.EstadoDao;
 import br.cefetmg.implicare.model.domain.Estado;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import java.util.List;
 public class EstadoDaoImpl implements EstadoDao {
 
     @Override
-    public List<Estado> listAll() throws PersistenceException {
+    public List<Estado> listAll() throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             String sql = "SELECT * FROM Estado ORDER BY Nom_Estado;";
 
@@ -48,7 +49,7 @@ public class EstadoDaoImpl implements EstadoDao {
     }
 
     @Override
-    public Estado getEstadoCod(int Cod_Estado) throws PersistenceException {
+    public Estado getEstadoCod(int Cod_Estado) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             String sql = "SELECT * FROM Estado WHERE Cod_Estado = ?";
 

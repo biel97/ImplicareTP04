@@ -11,6 +11,7 @@ import br.cefetmg.implicare.model.domain.CompetenciaPessoaFisica;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CompetenciaPessoaFisicaManagement;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -25,24 +26,24 @@ public class CompetenciaPessoaFisicaManagementImpl implements CompetenciaPessoaF
     }
 
     @Override
-    public void insert(CompetenciaPessoaFisica CompetenciaPessoaFisica) throws BusinessException, PersistenceException {
+    public void insert(CompetenciaPessoaFisica CompetenciaPessoaFisica) throws BusinessException, PersistenceException, RemoteException {
         CompetenciaPessoaFisicaDao.insert(CompetenciaPessoaFisica);
     }
 
     @Override
-    public boolean delete(long CPF, int Cod_Competencia) throws PersistenceException {
+    public boolean delete(long CPF, int Cod_Competencia) throws PersistenceException, RemoteException {
         boolean result = CompetenciaPessoaFisicaDao.delete(CPF, Cod_Competencia);
         return result;
     }
 
     @Override
-    public List<CompetenciaPessoaFisica> getCompetenciasPessoaFisica(long CPF) throws PersistenceException {
+    public List<CompetenciaPessoaFisica> getCompetenciasPessoaFisica(long CPF) throws PersistenceException, RemoteException {
         List<CompetenciaPessoaFisica> result = CompetenciaPessoaFisicaDao.getCompetenciasPessoaFisica(CPF);
         return result;
     }
 
     @Override
-    public CompetenciaPessoaFisica getCompetenciaPessoaFisicaCod(long CPF, int Cod_Competencia) throws PersistenceException {
+    public CompetenciaPessoaFisica getCompetenciaPessoaFisicaCod(long CPF, int Cod_Competencia) throws PersistenceException, RemoteException {
         CompetenciaPessoaFisica result = CompetenciaPessoaFisicaDao.getCompetenciaPessoaFisicaCod(CPF, Cod_Competencia);
         return result;
     }

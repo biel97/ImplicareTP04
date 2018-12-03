@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.CargoInteresseDao;
 import br.cefetmg.implicare.model.domain.CargoInteresse;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import java.util.List;
 public class CargoInteresseDaoImpl implements CargoInteresseDao {
 
     @Override
-    public void insert(CargoInteresse CargoInteresse) throws PersistenceException {
+    public void insert(CargoInteresse CargoInteresse) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             Long Seq_CargoInteresse;
 
@@ -46,7 +47,7 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
     }
 
     @Override
-    public boolean delete(long CPF, int Cod_Cargo) throws PersistenceException {
+    public boolean delete(long CPF, int Cod_Cargo) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String SQL = "DELETE FROM CargoInteresse"
@@ -68,7 +69,7 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
     }
 
     @Override
-    public List<CargoInteresse> getCargosInteresse(long CPF) throws PersistenceException {
+    public List<CargoInteresse> getCargosInteresse(long CPF) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM CargoInteresse WHERE CPF = ? ORDER BY Cod_Cargo";
@@ -100,7 +101,7 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
     }
 
     @Override
-    public CargoInteresse getCargoInteresseCod(long CPF, int Cod_Cargo) throws PersistenceException {
+    public CargoInteresse getCargoInteresseCod(long CPF, int Cod_Cargo) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM CargoInteresse WHERE CPF = ?, Cod_Cargo = ?";

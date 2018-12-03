@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.UsuarioDao;
 import br.cefetmg.implicare.model.domain.Usuario;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import java.sql.SQLException;
 public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
-    public void insert(Usuario Usuario) throws PersistenceException {
+    public void insert(Usuario Usuario) throws PersistenceException, RemoteException {
         try {
             Long Seq_Usuario;
 
@@ -52,7 +53,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
 
     @Override
-    public boolean update(Long CPF_CNPJ, Usuario Usuario) throws PersistenceException {
+    public boolean update(Long CPF_CNPJ, Usuario Usuario) throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
@@ -82,7 +83,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
 
     @Override
-    public Usuario getUsuarioCod(Long CPF_CNPJ) throws PersistenceException {
+    public Usuario getUsuarioCod(Long CPF_CNPJ) throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
@@ -116,7 +117,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
 
     @Override
-    public Usuario getLogin(Long CPF_CNPJ, String Senha) throws PersistenceException {
+    public Usuario getLogin(Long CPF_CNPJ, String Senha) throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
             //A senha será recebida já criptografada do usuário por razões de segurança, ou assim que é esperado...

@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,7 +39,7 @@ public class CidadeSocketProxy implements CidadeManagement {
     }
     
     @Override
-    public List<Cidade> getCidades(int Cod_Estado) throws PersistenceException {
+    public List<Cidade> getCidades(int Cod_Estado) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -59,7 +60,7 @@ public class CidadeSocketProxy implements CidadeManagement {
     }
 
     @Override
-    public Cidade getCidadeCod(int Cod_Cidade) throws PersistenceException {
+    public Cidade getCidadeCod(int Cod_Cidade) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

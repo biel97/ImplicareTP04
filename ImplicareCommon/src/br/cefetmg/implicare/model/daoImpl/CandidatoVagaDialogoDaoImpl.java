@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.CandidatoVagaDialogoDao;
 import br.cefetmg.implicare.model.domain.CandidatoVagaDialogo;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -20,7 +21,7 @@ import java.util.List;
 public class CandidatoVagaDialogoDaoImpl implements CandidatoVagaDialogoDao {
 
     @Override
-    public void insert(CandidatoVagaDialogo CandidatoVagaDialogo) throws PersistenceException {
+    public void insert(CandidatoVagaDialogo CandidatoVagaDialogo) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             Long Seq_CandidatoVagaDialogo;
 
@@ -54,7 +55,7 @@ public class CandidatoVagaDialogoDaoImpl implements CandidatoVagaDialogoDao {
     }
 
     @Override
-    public List<CandidatoVagaDialogo> getCandidatoVagaDialogo(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException {
+    public List<CandidatoVagaDialogo> getCandidatoVagaDialogo(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM CandidatoVagaDialogo WHERE CPF = ?, Cod_Cargo = ?, CNPJ = ?, Dat_Publicacao = ? "
@@ -97,7 +98,7 @@ public class CandidatoVagaDialogoDaoImpl implements CandidatoVagaDialogoDao {
     }
 
     @Override
-    public CandidatoVagaDialogo getCandidatoVagaDialogoCod(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, Timestamp Dat_Dialogo) throws PersistenceException {
+    public CandidatoVagaDialogo getCandidatoVagaDialogoCod(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, Timestamp Dat_Dialogo) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM CandidatoVagaDialogo WHERE CPF = ?, Cod_Cargo = ?, CNPJ = ?, "

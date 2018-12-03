@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.CompetenciaPessoaFisicaDao;
 import br.cefetmg.implicare.model.domain.CompetenciaPessoaFisica;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import java.util.List;
 public class CompetenciaPessoaFisicaDaoImpl implements CompetenciaPessoaFisicaDao {
 
     @Override
-    public void insert(CompetenciaPessoaFisica CompetenciaPessoaFisica) throws PersistenceException {
+    public void insert(CompetenciaPessoaFisica CompetenciaPessoaFisica) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             Long Seq_CompetenciaPessoaFisica;
@@ -48,7 +49,7 @@ public class CompetenciaPessoaFisicaDaoImpl implements CompetenciaPessoaFisicaDa
     }
 
     @Override
-    public boolean delete(long CPF, int Cod_Competencia) throws PersistenceException {
+    public boolean delete(long CPF, int Cod_Competencia) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String SQL = "DELETE FROM CompetenciaPessoaFisica"
@@ -70,7 +71,7 @@ public class CompetenciaPessoaFisicaDaoImpl implements CompetenciaPessoaFisicaDa
     }
 
     @Override
-    public List<CompetenciaPessoaFisica> getCompetenciasPessoaFisica(long CPF) throws PersistenceException {
+    public List<CompetenciaPessoaFisica> getCompetenciasPessoaFisica(long CPF) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             String sql = "SELECT * FROM CompetenciaPessoaFisica WHERE CPF = ? ORDER BY Cod_Competencia;";
 
@@ -104,7 +105,7 @@ public class CompetenciaPessoaFisicaDaoImpl implements CompetenciaPessoaFisicaDa
     }
 
     @Override
-    public CompetenciaPessoaFisica getCompetenciaPessoaFisicaCod(long CPF, int Cod_Competencia) throws PersistenceException {
+    public CompetenciaPessoaFisica getCompetenciaPessoaFisicaCod(long CPF, int Cod_Competencia) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM CompetenciaPessoaFisica WHERE CPF = ?, Cod_Competencia = ?";

@@ -10,6 +10,7 @@ import br.cefetmg.implicare.model.daoImpl.CompetenciaDaoImpl;
 import br.cefetmg.implicare.model.domain.Competencia;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CompetenciaManagement;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -24,13 +25,13 @@ public class CompetenciaManagementImpl implements CompetenciaManagement {
     }
     
     @Override
-    public List<Competencia> listAll() throws PersistenceException {
+    public List<Competencia> listAll() throws PersistenceException, RemoteException {
         List<Competencia> result = CompetenciaDao.listAll();
         return result;
     }
 
     @Override
-    public Competencia getCompetenciaCod(int Cod_Competencia) throws PersistenceException {
+    public Competencia getCompetenciaCod(int Cod_Competencia) throws PersistenceException, RemoteException {
         Competencia result = CompetenciaDao.getCompetenciaCod(Cod_Competencia);
         return result;
     }

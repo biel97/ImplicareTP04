@@ -12,6 +12,7 @@ import br.cefetmg.implicare.model.service.FormacaoAcademicaManagement;
 import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.rmi.RemoteException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class FormacaoAcademicaSocketProxy implements FormacaoAcademicaManagement
     }
     
     @Override
-    public void insert(FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException {
+    public void insert(FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
 
         Gson gson = new Gson();
@@ -53,7 +54,7 @@ public class FormacaoAcademicaSocketProxy implements FormacaoAcademicaManagement
     }
 
     @Override
-    public boolean update(long CPF, int Seq_Formacao, int Cod_Area_Estudo, FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException {
+    public boolean update(long CPF, int Seq_Formacao, int Cod_Area_Estudo, FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -81,7 +82,7 @@ public class FormacaoAcademicaSocketProxy implements FormacaoAcademicaManagement
     }
 
     @Override
-    public boolean delete(long CPF, int Seq_Formacao, int Cod_Area_Estudo) throws PersistenceException {
+    public boolean delete(long CPF, int Seq_Formacao, int Cod_Area_Estudo) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -108,7 +109,7 @@ public class FormacaoAcademicaSocketProxy implements FormacaoAcademicaManagement
     }
 
     @Override
-    public List<FormacaoAcademica> getFormacaoAcademica(long CPF) throws PersistenceException {
+    public List<FormacaoAcademica> getFormacaoAcademica(long CPF) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -129,7 +130,7 @@ public class FormacaoAcademicaSocketProxy implements FormacaoAcademicaManagement
     }
 
     @Override
-    public FormacaoAcademica getFormacaoAcademicaCod(long CPF, int Seq_Formacao, int Cod_Area_Estudo) throws PersistenceException {
+    public FormacaoAcademica getFormacaoAcademicaCod(long CPF, int Seq_Formacao, int Cod_Area_Estudo) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

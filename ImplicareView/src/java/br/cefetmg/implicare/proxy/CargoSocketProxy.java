@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -40,7 +41,7 @@ public class CargoSocketProxy implements CargoManagement {
     }
     
     @Override
-    public List<Cargo> listAll() throws PersistenceException {
+    public List<Cargo> listAll() throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -58,7 +59,7 @@ public class CargoSocketProxy implements CargoManagement {
     }
 
     @Override
-    public List<Cargo> getCargos(Set<CargoAreaEstudo> CargoArea) throws PersistenceException {
+    public List<Cargo> getCargos(Set<CargoAreaEstudo> CargoArea) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -79,7 +80,7 @@ public class CargoSocketProxy implements CargoManagement {
     }
 
     @Override
-    public Cargo getCargoCod(int Cod_Cargo) throws PersistenceException {
+    public Cargo getCargoCod(int Cod_Cargo) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

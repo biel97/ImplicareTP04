@@ -9,6 +9,7 @@ import br.cefetmg.implicare.model.domain.CargoAreaEstudo;
 import br.cefetmg.implicare.model.domain.FormacaoAcademica;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Set;
 
@@ -19,5 +20,5 @@ import java.util.Set;
  * 
  */
 public interface CargoAreaEstudoManagement {
-    public Set<CargoAreaEstudo> CargoAreaEstudo(List<FormacaoAcademica> FormAcad) throws BusinessException, PersistenceException;
+    public Set<CargoAreaEstudo> CargoAreaEstudo(List<FormacaoAcademica> FormAcad) throws BusinessException, PersistenceException, RemoteException;
 }

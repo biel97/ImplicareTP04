@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.PessoaFisicaDao;
 import br.cefetmg.implicare.model.domain.PessoaFisica;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import java.sql.SQLException;
 public class PessoaFisicaDaoImpl implements PessoaFisicaDao {
 
     @Override
-    public void insert(PessoaFisica PessoaFisica) throws PersistenceException {
+    public void insert(PessoaFisica PessoaFisica) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             Long Seq_PessoaFisica;
 
@@ -45,7 +46,7 @@ public class PessoaFisicaDaoImpl implements PessoaFisicaDao {
     }
 
     @Override
-    public boolean update(Long CPF, PessoaFisica PessoaFisica) throws PersistenceException {
+    public boolean update(Long CPF, PessoaFisica PessoaFisica) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String SQL = "UPDATE PessoaFisica SET Nome = ?, Data_Nascimento = ?"
@@ -68,7 +69,7 @@ public class PessoaFisicaDaoImpl implements PessoaFisicaDao {
     }
 
     @Override
-    public PessoaFisica getPessoaFisicaCod(Long CPF) throws PersistenceException {
+    public PessoaFisica getPessoaFisicaCod(Long CPF) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM PessoaFisica WHERE CPF = ?";

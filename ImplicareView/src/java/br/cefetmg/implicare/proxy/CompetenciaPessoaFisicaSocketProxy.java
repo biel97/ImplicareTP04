@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -39,7 +40,7 @@ public class CompetenciaPessoaFisicaSocketProxy implements CompetenciaPessoaFisi
     }
     
     @Override
-    public void insert(CompetenciaPessoaFisica CompetenciaPessoaFisica) throws BusinessException, PersistenceException {
+    public void insert(CompetenciaPessoaFisica CompetenciaPessoaFisica) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
 
         Gson gson = new Gson();
@@ -53,7 +54,7 @@ public class CompetenciaPessoaFisicaSocketProxy implements CompetenciaPessoaFisi
     }
 
     @Override
-    public boolean delete(long CPF, int Cod_Competencia) throws PersistenceException {
+    public boolean delete(long CPF, int Cod_Competencia) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -79,7 +80,7 @@ public class CompetenciaPessoaFisicaSocketProxy implements CompetenciaPessoaFisi
     }
 
     @Override
-    public List<CompetenciaPessoaFisica> getCompetenciasPessoaFisica(long CPF) throws PersistenceException {
+    public List<CompetenciaPessoaFisica> getCompetenciasPessoaFisica(long CPF) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -100,7 +101,7 @@ public class CompetenciaPessoaFisicaSocketProxy implements CompetenciaPessoaFisi
     }
 
     @Override
-    public CompetenciaPessoaFisica getCompetenciaPessoaFisicaCod(long CPF, int Cod_Competencia) throws PersistenceException {
+    public CompetenciaPessoaFisica getCompetenciaPessoaFisicaCod(long CPF, int Cod_Competencia) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.CidadeDao;
 import br.cefetmg.implicare.model.domain.Cidade;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import java.util.List;
 public class CidadeDaoImpl implements CidadeDao {
 
     @Override
-    public List<Cidade> getCidades(int Cod_Estado) throws PersistenceException {
+    public List<Cidade> getCidades(int Cod_Estado) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM Cidade WHERE Cod_Estado = ? ORDER BY Nom_Cidade;";
@@ -51,7 +52,7 @@ public class CidadeDaoImpl implements CidadeDao {
     }
 
     @Override
-    public Cidade getCidadeCod(int Cod_Cidade) throws PersistenceException {
+    public Cidade getCidadeCod(int Cod_Cidade) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM Cidade WHERE Cod_Estado = ?, Cod_Cidade = ?";

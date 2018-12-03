@@ -11,6 +11,7 @@ import br.cefetmg.implicare.model.domain.Usuario;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.UsuarioManagement;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -24,24 +25,24 @@ public class UsuarioManagementImpl implements UsuarioManagement {
     }
     
     @Override
-    public void insert(Usuario Usuario) throws BusinessException, PersistenceException {
+    public void insert(Usuario Usuario) throws BusinessException, PersistenceException, RemoteException {
         UsuarioDao.insert(Usuario);
     }
 
     @Override
-    public boolean update(Long CPF_CNPJ, Usuario Usuario) throws BusinessException, PersistenceException {
+    public boolean update(Long CPF_CNPJ, Usuario Usuario) throws BusinessException, PersistenceException, RemoteException {
         boolean result = UsuarioDao.update(CPF_CNPJ, Usuario);
         return result;
     }
 
     @Override
-    public Usuario getUsuarioCod(Long CPF_CNPJ) throws PersistenceException {
+    public Usuario getUsuarioCod(Long CPF_CNPJ) throws PersistenceException, RemoteException {
         Usuario result = UsuarioDao.getUsuarioCod(CPF_CNPJ);
         return result;
     }
     
     @Override
-    public Usuario getLogin(Long CPF_CNPJ, String Senha) throws PersistenceException{
+    public Usuario getLogin(Long CPF_CNPJ, String Senha) throws PersistenceException, RemoteException{
         Usuario result = UsuarioDao.getLogin(CPF_CNPJ, Senha);
         return result;
     }

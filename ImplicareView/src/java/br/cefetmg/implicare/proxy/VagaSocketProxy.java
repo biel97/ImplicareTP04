@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class VagaSocketProxy implements  VagaManagement {
     }
     
     @Override
-    public void insert(Vaga Vaga) throws BusinessException, PersistenceException {
+    public void insert(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
 
         Gson gson = new Gson();
@@ -55,7 +56,7 @@ public class VagaSocketProxy implements  VagaManagement {
     }
 
     @Override
-    public boolean update(long CNPJ, int Cod_Cargo, Date Dat_Publicacao, Vaga Vaga) throws BusinessException, PersistenceException {
+    public boolean update(long CNPJ, int Cod_Cargo, Date Dat_Publicacao, Vaga Vaga) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -83,7 +84,7 @@ public class VagaSocketProxy implements  VagaManagement {
     }
 
     @Override
-    public boolean delete(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException {
+    public boolean delete(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -110,7 +111,7 @@ public class VagaSocketProxy implements  VagaManagement {
     }
 
     @Override
-    public List<Vaga> getVagaCNPJ(long CNPJ) throws PersistenceException {
+    public List<Vaga> getVagaCNPJ(long CNPJ) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -131,7 +132,7 @@ public class VagaSocketProxy implements  VagaManagement {
     }
 
     @Override
-    public List<Vaga> getVagaCod_Cargo(List<CargoInteresse> CarInteresse) throws PersistenceException {
+    public List<Vaga> getVagaCod_Cargo(List<CargoInteresse> CarInteresse) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -152,7 +153,7 @@ public class VagaSocketProxy implements  VagaManagement {
     }
 
     @Override
-    public Vaga getVagaCod(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException {
+    public Vaga getVagaCod(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

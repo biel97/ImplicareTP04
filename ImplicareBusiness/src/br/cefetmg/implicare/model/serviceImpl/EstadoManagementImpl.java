@@ -10,6 +10,7 @@ import br.cefetmg.implicare.model.daoImpl.EstadoDaoImpl;
 import br.cefetmg.implicare.model.domain.Estado;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.EstadoManagement;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -24,13 +25,13 @@ public class EstadoManagementImpl implements EstadoManagement {
     }
     
     @Override
-    public List<Estado> listAll() throws PersistenceException {
+    public List<Estado> listAll() throws PersistenceException, RemoteException {
         List<Estado> result = EstadoDao.listAll();
         return result;
     }
 
     @Override
-    public Estado getEstadoCod(int Cod_Estado) throws PersistenceException {
+    public Estado getEstadoCod(int Cod_Estado) throws PersistenceException, RemoteException {
         Estado result = EstadoDao.getEstadoCod(Cod_Estado);
         return result;
     }

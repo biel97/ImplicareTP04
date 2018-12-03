@@ -11,6 +11,7 @@ import br.cefetmg.implicare.model.domain.Cargo;
 import br.cefetmg.implicare.model.domain.CargoAreaEstudo;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CargoManagement;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Set;
 
@@ -26,19 +27,19 @@ public class CargoManagementImpl implements CargoManagement {
     }
     
     @Override
-    public List<Cargo> listAll() throws PersistenceException {
+    public List<Cargo> listAll() throws PersistenceException, RemoteException {
         List<Cargo> result = CargoDao.listAll();
         return result;
     }
     
      @Override
-    public List<Cargo> getCargos(Set<CargoAreaEstudo> CargoArea) throws PersistenceException {
+    public List<Cargo> getCargos(Set<CargoAreaEstudo> CargoArea) throws PersistenceException, RemoteException {
         List<Cargo> result = CargoDao.getCargos(CargoArea);
         return result;
     }
     
     @Override
-    public Cargo getCargoCod(int Cod_Cargo) throws PersistenceException {
+    public Cargo getCargoCod(int Cod_Cargo) throws PersistenceException, RemoteException {
         Cargo result = CargoDao.getCargoCod(Cod_Cargo);
         return result;
     }

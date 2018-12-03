@@ -11,6 +11,7 @@ import br.cefetmg.implicare.model.domain.CandidatoVaga;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CandidatoVagaManagement;
+import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
 
@@ -26,24 +27,24 @@ public class CandidatoVagaManagementImpl implements CandidatoVagaManagement {
     }
     
     @Override
-    public void insert(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException {
+    public void insert(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException, RemoteException {
         CandidatoVagaDao.insert(CandidatoVaga);
     }
 
     @Override
-    public boolean update(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException {
+    public boolean update(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException, RemoteException {
         boolean result = CandidatoVagaDao.update(CPF, Cod_Cargo, CNPJ, Dat_Publicacao, CandidatoVaga);
         return result;
     }
 
     @Override
-    public List<CandidatoVaga> getCandidatosVaga(int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException {
+    public List<CandidatoVaga> getCandidatosVaga(int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         List<CandidatoVaga> result = CandidatoVagaDao.getCandidatosVaga(Cod_Cargo, CNPJ, Dat_Publicacao);
         return result;
     }
 
     @Override
-    public CandidatoVaga getCandidatoVagaCod(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException {
+    public CandidatoVaga getCandidatoVagaCod(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         CandidatoVaga result = CandidatoVagaDao.getCandidatoVagaCod(CPF, Cod_Cargo, CNPJ, Dat_Publicacao);
         return result;
     }

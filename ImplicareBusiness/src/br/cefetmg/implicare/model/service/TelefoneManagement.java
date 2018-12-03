@@ -8,6 +8,7 @@ package br.cefetmg.implicare.model.service;
 import br.cefetmg.implicare.model.domain.Telefone;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -17,9 +18,9 @@ import java.util.List;
  * 
  */
 public interface TelefoneManagement {
-    public void insert(Telefone Telefone) throws BusinessException, PersistenceException;
-    public boolean update(long CPF_CNPJ, String Num_Telefone, Telefone Telefone) throws BusinessException, PersistenceException;
-    public boolean delete(long CPF_CNPJ, String Num_Telefone) throws PersistenceException;
-    public List<Telefone> getTelefones(long CPF_CNPJ) throws PersistenceException;
-    public Telefone getTelefoneCod(long CPF_CNPJ, String Num_Telefone) throws PersistenceException;
+    public void insert(Telefone Telefone) throws BusinessException, PersistenceException, RemoteException;
+    public boolean update(long CPF_CNPJ, String Num_Telefone, Telefone Telefone) throws BusinessException, PersistenceException, RemoteException;
+    public boolean delete(long CPF_CNPJ, String Num_Telefone) throws PersistenceException, RemoteException;
+    public List<Telefone> getTelefones(long CPF_CNPJ) throws PersistenceException, RemoteException;
+    public Telefone getTelefoneCod(long CPF_CNPJ, String Num_Telefone) throws PersistenceException, RemoteException;
 }

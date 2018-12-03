@@ -2,6 +2,7 @@ package br.cefetmg.implicare.model.dao;
 
 import br.cefetmg.implicare.model.domain.PessoaFisica;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -9,9 +10,9 @@ import br.cefetmg.implicare.model.exception.PersistenceException;
  */
 public interface PessoaFisicaDao {
 
-    public void insert(PessoaFisica PessoaFisica) throws PersistenceException;
+    public void insert(PessoaFisica PessoaFisica) throws PersistenceException, RemoteException;
 
-    public boolean update(Long CPF, PessoaFisica PessoaFisica) throws PersistenceException;
+    public boolean update(Long CPF, PessoaFisica PessoaFisica) throws PersistenceException, RemoteException;
 
-    public PessoaFisica getPessoaFisicaCod(Long CPF) throws PersistenceException;
+    public PessoaFisica getPessoaFisicaCod(Long CPF) throws PersistenceException, RemoteException;
 }

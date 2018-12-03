@@ -5,6 +5,7 @@ import br.cefetmg.implicare.model.domain.CargoInteresse;
 import br.cefetmg.implicare.model.domain.Vaga;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -20,7 +21,7 @@ import java.util.List;
 public class VagaDaoImpl implements VagaDao {
 
     @Override
-    public void insert(Vaga Vaga) throws PersistenceException {
+    public void insert(Vaga Vaga) throws PersistenceException, RemoteException {
         try {
             Long Seq_Vaga;
 
@@ -57,7 +58,7 @@ public class VagaDaoImpl implements VagaDao {
     }
 
     @Override
-    public boolean update(long CNPJ, int Cod_Cargo, Date Dat_Publicacao, Vaga Vaga) throws PersistenceException {
+    public boolean update(long CNPJ, int Cod_Cargo, Date Dat_Publicacao, Vaga Vaga) throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
@@ -89,7 +90,7 @@ public class VagaDaoImpl implements VagaDao {
     }
 
     @Override
-    public boolean delete(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException {
+    public boolean delete(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
@@ -113,7 +114,7 @@ public class VagaDaoImpl implements VagaDao {
     }
 
     @Override
-    public List<Vaga> getVagaCNPJ(long CNPJ) throws PersistenceException {
+    public List<Vaga> getVagaCNPJ(long CNPJ) throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
@@ -154,7 +155,7 @@ public class VagaDaoImpl implements VagaDao {
     }
 
     @Override
-    public List<Vaga> getVagaCod_Cargo(List<CargoInteresse> CarInteresse) throws PersistenceException {
+    public List<Vaga> getVagaCod_Cargo(List<CargoInteresse> CarInteresse) throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
@@ -198,7 +199,7 @@ public class VagaDaoImpl implements VagaDao {
     }
 
     @Override
-    public Vaga getVagaCod(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException {
+    public Vaga getVagaCod(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 

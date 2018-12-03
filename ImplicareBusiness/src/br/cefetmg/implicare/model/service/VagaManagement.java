@@ -9,6 +9,7 @@ import br.cefetmg.implicare.model.domain.CargoInteresse;
 import br.cefetmg.implicare.model.domain.Vaga;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
 
@@ -19,10 +20,10 @@ import java.util.List;
  * 
  */
 public interface VagaManagement {
-    public void insert(Vaga Vaga) throws BusinessException, PersistenceException;
-    public boolean update(long CNPJ, int Cod_Cargo, Date Dat_Publicacao,Vaga Vaga) throws BusinessException, PersistenceException;
-    public boolean delete(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException;
-    public List<Vaga> getVagaCNPJ(long CNPJ) throws PersistenceException;
-    public List<Vaga> getVagaCod_Cargo(List<CargoInteresse> CarInteresse) throws PersistenceException;
-    public Vaga getVagaCod(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException;
+    public void insert(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException;
+    public boolean update(long CNPJ, int Cod_Cargo, Date Dat_Publicacao,Vaga Vaga) throws BusinessException, PersistenceException, RemoteException;
+    public boolean delete(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException, RemoteException;
+    public List<Vaga> getVagaCNPJ(long CNPJ) throws PersistenceException, RemoteException;
+    public List<Vaga> getVagaCod_Cargo(List<CargoInteresse> CarInteresse) throws PersistenceException, RemoteException;
+    public Vaga getVagaCod(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException, RemoteException;
 }

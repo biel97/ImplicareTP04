@@ -2,6 +2,7 @@ package br.cefetmg.implicare.model.dao;
 
 import br.cefetmg.implicare.model.domain.CompetenciaPessoaFisica;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -10,11 +11,11 @@ import java.util.List;
  */
 public interface CompetenciaPessoaFisicaDao {
 
-    public void insert(CompetenciaPessoaFisica CompetenciaPessoaFisica) throws PersistenceException;
+    public void insert(CompetenciaPessoaFisica CompetenciaPessoaFisica) throws PersistenceException, RemoteException;
 
-    public boolean delete(long CPF, int Cod_Competencia) throws PersistenceException;
+    public boolean delete(long CPF, int Cod_Competencia) throws PersistenceException, RemoteException;
 
-    public List<CompetenciaPessoaFisica> getCompetenciasPessoaFisica(long CPF) throws PersistenceException;
+    public List<CompetenciaPessoaFisica> getCompetenciasPessoaFisica(long CPF) throws PersistenceException, RemoteException;
 
-    public CompetenciaPessoaFisica getCompetenciaPessoaFisicaCod(long CPF, int Cod_Competencia) throws PersistenceException;
+    public CompetenciaPessoaFisica getCompetenciaPessoaFisicaCod(long CPF, int Cod_Competencia) throws PersistenceException, RemoteException;
 }

@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.EmpresaDao;
 import br.cefetmg.implicare.model.domain.Empresa;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import java.sql.SQLException;
 public class EmpresaDaoImpl implements EmpresaDao {
 
     @Override
-    public void insert(Empresa Empresa) throws PersistenceException {
+    public void insert(Empresa Empresa) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             Long Seq_Empresa;
 
@@ -45,7 +46,7 @@ public class EmpresaDaoImpl implements EmpresaDao {
     }
 
     @Override
-    public boolean update(Long CNPJ, Empresa Empresa) throws PersistenceException {
+    public boolean update(Long CNPJ, Empresa Empresa) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String SQL = "UPDATE Empresa SET Nom_Razao_Social, Nom_Fantasia"
@@ -69,7 +70,7 @@ public class EmpresaDaoImpl implements EmpresaDao {
     }
 
     @Override
-    public Empresa getEmpresaCod(Long CNPJ) throws PersistenceException {
+    public Empresa getEmpresaCod(Long CNPJ) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             String sql = "SELECT * FROM Empresa WHERE CNPJ = ?";
 

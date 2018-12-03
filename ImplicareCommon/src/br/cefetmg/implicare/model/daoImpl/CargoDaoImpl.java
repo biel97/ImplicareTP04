@@ -5,6 +5,7 @@ import br.cefetmg.implicare.model.domain.Cargo;
 import br.cefetmg.implicare.model.domain.CargoAreaEstudo;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ import java.util.Set;
 public class CargoDaoImpl implements CargoDao {
 
     @Override
-    public List<Cargo> listAll() throws PersistenceException {
+    public List<Cargo> listAll() throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM Cargo ORDER BY Nom_Cargo;";
@@ -51,7 +52,7 @@ public class CargoDaoImpl implements CargoDao {
     }
 
     @Override
-    public List<Cargo> getCargos(Set<CargoAreaEstudo> CargoArea) throws PersistenceException {
+    public List<Cargo> getCargos(Set<CargoAreaEstudo> CargoArea) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             List<Cargo> Cargo = new ArrayList<>();
@@ -86,7 +87,7 @@ public class CargoDaoImpl implements CargoDao {
     }
 
     @Override
-    public Cargo getCargoCod(int Cod_Cargo) throws PersistenceException {
+    public Cargo getCargoCod(int Cod_Cargo) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM Cargo WHERE Cod_Cargo = ?";

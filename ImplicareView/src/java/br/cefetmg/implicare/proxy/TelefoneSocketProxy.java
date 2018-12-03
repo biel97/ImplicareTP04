@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -39,7 +40,7 @@ public class TelefoneSocketProxy implements TelefoneManagement {
     }
     
     @Override
-    public void insert(Telefone Telefone) throws BusinessException, PersistenceException {
+    public void insert(Telefone Telefone) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
 
         Gson gson = new Gson();
@@ -53,7 +54,7 @@ public class TelefoneSocketProxy implements TelefoneManagement {
     }
 
     @Override
-    public boolean update(long CPF_CNPJ, String Num_Telefone, Telefone Telefone) throws BusinessException, PersistenceException {
+    public boolean update(long CPF_CNPJ, String Num_Telefone, Telefone Telefone) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -80,7 +81,7 @@ public class TelefoneSocketProxy implements TelefoneManagement {
     }
 
     @Override
-    public boolean delete(long CPF_CNPJ, String Num_Telefone) throws PersistenceException {
+    public boolean delete(long CPF_CNPJ, String Num_Telefone) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -106,7 +107,7 @@ public class TelefoneSocketProxy implements TelefoneManagement {
     }
 
     @Override
-    public List<Telefone> getTelefones(long CPF_CNPJ) throws PersistenceException {
+    public List<Telefone> getTelefones(long CPF_CNPJ) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -127,7 +128,7 @@ public class TelefoneSocketProxy implements TelefoneManagement {
     }
 
     @Override
-    public Telefone getTelefoneCod(long CPF_CNPJ, String Num_Telefone) throws PersistenceException {
+    public Telefone getTelefoneCod(long CPF_CNPJ, String Num_Telefone) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

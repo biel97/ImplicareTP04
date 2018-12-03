@@ -10,6 +10,7 @@ import br.cefetmg.implicare.model.daoImpl.CidadeDaoImpl;
 import br.cefetmg.implicare.model.domain.Cidade;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CidadeManagement;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -24,13 +25,13 @@ public class CidadeManagementImpl implements CidadeManagement {
     }
     
     @Override
-    public List<Cidade> getCidades(int Cod_Estado) throws PersistenceException {
+    public List<Cidade> getCidades(int Cod_Estado) throws PersistenceException, RemoteException {
         List<Cidade> result = CidadeDao.getCidades(Cod_Estado);
         return result;
     }
 
     @Override
-    public Cidade getCidadeCod(int Cod_Cidade) throws PersistenceException {
+    public Cidade getCidadeCod(int Cod_Cidade) throws PersistenceException, RemoteException {
         Cidade result = CidadeDao.getCidadeCod(Cod_Cidade);
         return result;
     }
