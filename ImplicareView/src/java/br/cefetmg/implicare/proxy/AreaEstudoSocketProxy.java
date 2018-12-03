@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,7 +39,7 @@ public class AreaEstudoSocketProxy implements AreaEstudoManagement {
     }
     
     @Override
-    public ArrayList<AreaEstudo> listAll() throws PersistenceException {
+    public ArrayList<AreaEstudo> listAll() throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -56,7 +57,7 @@ public class AreaEstudoSocketProxy implements AreaEstudoManagement {
     }
 
     @Override
-    public AreaEstudo getAreaEstudoCod(int Cod_Area_Estudo) throws PersistenceException {
+    public AreaEstudo getAreaEstudoCod(int Cod_Area_Estudo) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

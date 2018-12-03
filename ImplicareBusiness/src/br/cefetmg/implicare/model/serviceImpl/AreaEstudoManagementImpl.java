@@ -12,7 +12,6 @@ import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.AreaEstudoManagement;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *

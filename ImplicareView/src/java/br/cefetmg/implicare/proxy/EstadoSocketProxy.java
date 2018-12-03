@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,7 +39,7 @@ public class EstadoSocketProxy implements EstadoManagement {
     }
     
     @Override
-    public List<Estado> listAll() throws PersistenceException {
+    public List<Estado> listAll() throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -56,7 +57,7 @@ public class EstadoSocketProxy implements EstadoManagement {
     }
 
     @Override
-    public Estado getEstadoCod(int Cod_Estado) throws PersistenceException {
+    public Estado getEstadoCod(int Cod_Estado) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

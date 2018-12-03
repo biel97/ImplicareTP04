@@ -13,6 +13,7 @@ import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +38,7 @@ public class UsuarioSocketProxy implements UsuarioManagement{
     }
     
     @Override
-    public void insert(Usuario Usuario) throws BusinessException, PersistenceException {
+    public void insert(Usuario Usuario) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
 
         Gson gson = new Gson();
@@ -51,7 +52,7 @@ public class UsuarioSocketProxy implements UsuarioManagement{
     }
 
     @Override
-    public boolean update(Long CPF_CNPJ, Usuario Usuario) throws BusinessException, PersistenceException {
+    public boolean update(Long CPF_CNPJ, Usuario Usuario) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -77,7 +78,7 @@ public class UsuarioSocketProxy implements UsuarioManagement{
     }
 
     @Override
-    public Usuario getUsuarioCod(Long CPF_CNPJ) throws PersistenceException {
+    public Usuario getUsuarioCod(Long CPF_CNPJ) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -94,7 +95,7 @@ public class UsuarioSocketProxy implements UsuarioManagement{
     }
 
     @Override
-    public Usuario getLogin(Long CPF_CNPJ, String Senha) throws PersistenceException {
+    public Usuario getLogin(Long CPF_CNPJ, String Senha) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

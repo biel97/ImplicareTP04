@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class CandidatoVagaSocketProxy implements CandidatoVagaManagement {
     }
     
     @Override
-    public void insert(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException {
+    public void insert(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
 
         Gson gson = new Gson();
@@ -54,7 +55,7 @@ public class CandidatoVagaSocketProxy implements CandidatoVagaManagement {
     }
 
     @Override
-    public boolean update(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException {
+    public boolean update(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -81,7 +82,7 @@ public class CandidatoVagaSocketProxy implements CandidatoVagaManagement {
     }
 
     @Override
-    public List<CandidatoVaga> getCandidatosVaga(int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException {
+    public List<CandidatoVaga> getCandidatosVaga(int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -104,7 +105,7 @@ public class CandidatoVagaSocketProxy implements CandidatoVagaManagement {
     }
 
     @Override
-    public CandidatoVaga getCandidatoVagaCod(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException {
+    public CandidatoVaga getCandidatoVagaCod(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

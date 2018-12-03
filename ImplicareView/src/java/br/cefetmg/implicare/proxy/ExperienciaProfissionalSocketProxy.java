@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -39,7 +40,7 @@ public class ExperienciaProfissionalSocketProxy implements ExperienciaProfission
     }
     
     @Override
-    public void insert(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException {
+    public void insert(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
 
         Gson gson = new Gson();
@@ -53,7 +54,7 @@ public class ExperienciaProfissionalSocketProxy implements ExperienciaProfission
     }
 
     @Override
-    public boolean update(long CPF, int Seq_Experiencia, int Cod_Cargo, ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException {
+    public boolean update(long CPF, int Seq_Experiencia, int Cod_Cargo, ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -81,7 +82,7 @@ public class ExperienciaProfissionalSocketProxy implements ExperienciaProfission
     }
 
     @Override
-    public boolean delete(long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
+    public boolean delete(long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -108,7 +109,7 @@ public class ExperienciaProfissionalSocketProxy implements ExperienciaProfission
     }
 
     @Override
-    public List<ExperienciaProfissional> getExperienciasProfissionais(long CPF) throws PersistenceException {
+    public List<ExperienciaProfissional> getExperienciasProfissionais(long CPF) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -129,7 +130,7 @@ public class ExperienciaProfissionalSocketProxy implements ExperienciaProfission
     }
 
     @Override
-    public ExperienciaProfissional getExperienciaProfissionalCod(long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
+    public ExperienciaProfissional getExperienciaProfissionalCod(long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

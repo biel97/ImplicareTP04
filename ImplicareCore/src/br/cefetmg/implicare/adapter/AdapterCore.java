@@ -9,6 +9,7 @@ import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,14 +40,16 @@ public class AdapterCore implements Runnable{
             analisaTipoOperacao();
         } catch (PersistenceException ex) {
             Logger.getLogger(AdapterCore.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(AdapterCore.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void enviaPacoteResposta(Pacote pctResposta) throws IOException {
+    public void enviaPacoteResposta(Pacote pctResposta) throws IOException, RemoteException {
         Servidor.enviaDados(enderecoIP, portaCliente, pctResposta);
     }
     
-    public void analisaTipoOperacao() throws PersistenceException{
+    public void analisaTipoOperacao() throws PersistenceException, RemoteException{
         TipOperacao tipOperacao = pacote.getTipoOperacao();
         Pacote pctResposta;
         
@@ -58,7 +61,6 @@ public class AdapterCore implements Runnable{
         CargoAreaEstudoManagement cargoAreaEstudo = new CargoAreaEstudoMangementImpl();
         CargoInteresseManagement cargoInteresse = new CargoInteresseManagementImpl();
         CargoManagement cargo = new CargoManagementImpl();
-        CepManagement cep = new CepManagementImpl();
         CidadeManagement cidade = new CidadeManagementImpl();
         CompetenciaManagement competencia = new CompetenciaManagementImpl();
         CompetenciaPessoaFisicaManagement competenciaPessoaFisica = new CompetenciaPessoaFisicaManagementImpl();

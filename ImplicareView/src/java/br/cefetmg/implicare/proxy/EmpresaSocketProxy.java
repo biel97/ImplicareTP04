@@ -13,6 +13,7 @@ import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +38,7 @@ public class EmpresaSocketProxy implements EmpresaManagement {
     }
     
     @Override
-    public void insert(Empresa Empresa) throws BusinessException, PersistenceException {
+    public void insert(Empresa Empresa) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
 
         Gson gson = new Gson();
@@ -51,7 +52,7 @@ public class EmpresaSocketProxy implements EmpresaManagement {
     }
 
     @Override
-    public boolean update(Long CNPJ, Empresa Empresa) throws BusinessException, PersistenceException {
+    public boolean update(Long CNPJ, Empresa Empresa) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -77,7 +78,7 @@ public class EmpresaSocketProxy implements EmpresaManagement {
     }
 
     @Override
-    public Empresa getEmpresaCod(Long CNPJ) throws PersistenceException {
+    public Empresa getEmpresaCod(Long CNPJ) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

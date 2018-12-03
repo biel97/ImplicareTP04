@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -39,7 +40,7 @@ public class CargoInteresseSocketProxy implements CargoInteresseManagement {
     }
     
     @Override
-    public void insert(CargoInteresse CargoInteresse) throws BusinessException, PersistenceException {
+    public void insert(CargoInteresse CargoInteresse) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
 
         Gson gson = new Gson();
@@ -53,7 +54,7 @@ public class CargoInteresseSocketProxy implements CargoInteresseManagement {
     }
 
     @Override
-    public boolean delete(long CPF, int Cod_Cargo) throws PersistenceException {
+    public boolean delete(long CPF, int Cod_Cargo) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -79,7 +80,7 @@ public class CargoInteresseSocketProxy implements CargoInteresseManagement {
     }
 
     @Override
-    public List<CargoInteresse> getCargosInteresse(long CPF) throws PersistenceException {
+    public List<CargoInteresse> getCargosInteresse(long CPF) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -100,7 +101,7 @@ public class CargoInteresseSocketProxy implements CargoInteresseManagement {
     }
 
     @Override
-    public CargoInteresse getCargoInteresseCod(long CPF, int Cod_Cargo) throws PersistenceException {
+    public CargoInteresse getCargoInteresseCod(long CPF, int Cod_Cargo) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

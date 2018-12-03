@@ -13,6 +13,7 @@ import br.cefetmg.inf.implicare.util.*;
 import com.google.gson.Gson;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +38,7 @@ public class PessoaFisicaSocketProxy implements PessoaFisicaManagement {
     }
     
     @Override
-    public void insert(PessoaFisica PessoaFisica) throws BusinessException, PersistenceException {
+    public void insert(PessoaFisica PessoaFisica) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
 
         Gson gson = new Gson();
@@ -51,7 +52,7 @@ public class PessoaFisicaSocketProxy implements PessoaFisicaManagement {
     }
 
     @Override
-    public boolean update(Long CPF, PessoaFisica PessoaFisica) throws BusinessException, PersistenceException {
+    public boolean update(Long CPF, PessoaFisica PessoaFisica) throws BusinessException, PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
         boolean pacote;
@@ -77,7 +78,7 @@ public class PessoaFisicaSocketProxy implements PessoaFisicaManagement {
     }
 
     @Override
-    public PessoaFisica getPessoaFisicaCod(Long CPF) throws PersistenceException {
+    public PessoaFisica getPessoaFisicaCod(Long CPF) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

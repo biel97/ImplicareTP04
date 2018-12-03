@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,7 +39,7 @@ public class ProficienciaSocketProxy implements ProficienciaManagement {
     }
     
     @Override
-    public List<Proficiencia> listAll() throws PersistenceException {
+    public List<Proficiencia> listAll() throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -56,7 +57,7 @@ public class ProficienciaSocketProxy implements ProficienciaManagement {
     }
 
     @Override
-    public Proficiencia getProficienciaCod(int Cod_Proficiencia) throws PersistenceException {
+    public Proficiencia getProficienciaCod(int Cod_Proficiencia) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 

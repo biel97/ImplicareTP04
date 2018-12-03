@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,7 +39,7 @@ public class CompetenciaSocketProxy implements CompetenciaManagement {
     }
     
     @Override
-    public List<Competencia> listAll() throws PersistenceException {
+    public List<Competencia> listAll() throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
@@ -56,7 +57,7 @@ public class CompetenciaSocketProxy implements CompetenciaManagement {
     }
 
     @Override
-    public Competencia getCompetenciaCod(int Cod_Competencia) throws PersistenceException {
+    public Competencia getCompetenciaCod(int Cod_Competencia) throws PersistenceException, RemoteException {
         Pacote pacoteEnviado;
         Pacote pacoteRecebido;
 
