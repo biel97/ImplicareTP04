@@ -14,12 +14,16 @@ import javax.persistence.ManyToOne;
  *
  * @author Gabriel
  */
-@Entity(name="PessoaFisica")
-public class PessoaFisicaJPA {
-
-    private long CPF;
+@Entity(name="PessoaFisicaJPA")
+public class PessoaFisicaJPA implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cpf")
+    private Long CPF;
     private String Nome;
+    @Column(name = "data_nascimento")
     private Date Data_Nascimento;
+
 
     public PessoaFisicaJPA() {
     }
