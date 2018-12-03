@@ -10,6 +10,7 @@ import br.cefetmg.implicare.model.daoImpl.ProficienciaDaoImpl;
 import br.cefetmg.implicare.model.domain.Proficiencia;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.ProficienciaManagement;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -24,13 +25,13 @@ public class ProficienciaManagementImpl implements ProficienciaManagement {
     }
     
     @Override
-    public List<Proficiencia> listAll() throws PersistenceException {
+    public List<Proficiencia> listAll() throws PersistenceException, RemoteException {
         List<Proficiencia> result = ProficienciaDao.listAll();
         return result;
     }
 
     @Override
-    public Proficiencia getProficienciaCod(int Cod_Proficiencia) throws PersistenceException {
+    public Proficiencia getProficienciaCod(int Cod_Proficiencia) throws PersistenceException, RemoteException {
         Proficiencia result = ProficienciaDao.getProficienciaCod(Cod_Proficiencia);
         return result;
     }

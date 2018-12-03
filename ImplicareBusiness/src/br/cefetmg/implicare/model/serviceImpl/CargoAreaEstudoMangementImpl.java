@@ -12,6 +12,7 @@ import br.cefetmg.implicare.model.domain.FormacaoAcademica;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CargoAreaEstudoManagement;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class CargoAreaEstudoMangementImpl implements CargoAreaEstudoManagement {
     }
     
     @Override
-    public Set<CargoAreaEstudo> CargoAreaEstudo(List<FormacaoAcademica> FormAcad) throws BusinessException, PersistenceException {
+    public Set<CargoAreaEstudo> CargoAreaEstudo(List<FormacaoAcademica> FormAcad) throws BusinessException, PersistenceException, RemoteException {
         Set<CargoAreaEstudo> result = CargoAreaEstudoDao.CargoAreaEstudo(FormAcad);
         return result;
     }

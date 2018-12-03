@@ -11,6 +11,7 @@ import br.cefetmg.implicare.model.domain.PessoaFisica;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.PessoaFisicaManagement;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -24,18 +25,18 @@ public class PessoaFisicaManagementImpl implements PessoaFisicaManagement {
     }
     
     @Override
-    public void insert(PessoaFisica PessoaFisica) throws BusinessException, PersistenceException {
+    public void insert(PessoaFisica PessoaFisica) throws BusinessException, PersistenceException, RemoteException {
         PessoaFisicaDao.insert(PessoaFisica);
     }
 
     @Override
-    public boolean update(Long CPF, PessoaFisica PessoaFisica) throws BusinessException, PersistenceException {
+    public boolean update(Long CPF, PessoaFisica PessoaFisica) throws BusinessException, PersistenceException, RemoteException {
         boolean result = PessoaFisicaDao.update(CPF, PessoaFisica);
         return result;
     }
 
     @Override
-    public PessoaFisica getPessoaFisicaCod(Long CPF) throws PersistenceException {
+    public PessoaFisica getPessoaFisicaCod(Long CPF) throws PersistenceException, RemoteException {
         PessoaFisica result = PessoaFisicaDao.getPessoaFisicaCod(CPF);
         return result;
     }

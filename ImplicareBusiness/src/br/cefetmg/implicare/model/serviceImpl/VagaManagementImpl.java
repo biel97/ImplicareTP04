@@ -12,6 +12,7 @@ import br.cefetmg.implicare.model.domain.Vaga;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.VagaManagement;
+import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
 
@@ -27,36 +28,36 @@ public class VagaManagementImpl implements VagaManagement {
     }
 
     @Override
-    public void insert(Vaga Vaga) throws BusinessException, PersistenceException {
+    public void insert(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException {
         VagaDao.insert(Vaga);
     }
 
     @Override
-    public boolean update(long CNPJ, int Cod_Cargo, Date Dat_Publicacao, Vaga Vaga) throws BusinessException, PersistenceException {
+    public boolean update(long CNPJ, int Cod_Cargo, Date Dat_Publicacao, Vaga Vaga) throws BusinessException, PersistenceException, RemoteException {
         boolean result = VagaDao.update(CNPJ, Cod_Cargo, Dat_Publicacao, Vaga);
         return result;
     }
 
     @Override
-    public boolean delete(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException {
+    public boolean delete(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         boolean result = VagaDao.delete(CNPJ, Cod_Cargo, Dat_Publicacao);
         return result;
     }
 
     @Override
-    public List<Vaga> getVagaCNPJ(long CNPJ) throws PersistenceException {
+    public List<Vaga> getVagaCNPJ(long CNPJ) throws PersistenceException, RemoteException {
         List<Vaga> result = VagaDao.getVagaCNPJ(CNPJ);
         return result;
     }
 
     @Override
-    public List<Vaga> getVagaCod_Cargo(List<CargoInteresse> CarInteresse) throws PersistenceException {
+    public List<Vaga> getVagaCod_Cargo(List<CargoInteresse> CarInteresse) throws PersistenceException, RemoteException {
         List<Vaga> result = VagaDao.getVagaCod_Cargo(CarInteresse);
         return result;
     }
 
     @Override
-    public Vaga getVagaCod(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException {
+    public Vaga getVagaCod(long CNPJ, int Cod_Cargo, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         Vaga result = VagaDao.getVagaCod(CNPJ, Cod_Cargo, Dat_Publicacao);
         return result;
     }

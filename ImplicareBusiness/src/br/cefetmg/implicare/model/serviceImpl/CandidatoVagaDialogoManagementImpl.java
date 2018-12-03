@@ -11,6 +11,7 @@ import br.cefetmg.implicare.model.domain.CandidatoVagaDialogo;
 import br.cefetmg.implicare.model.exception.BusinessException;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CandidatoVagaDialogoManagement;
+import java.rmi.RemoteException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
@@ -27,18 +28,18 @@ public class CandidatoVagaDialogoManagementImpl implements CandidatoVagaDialogoM
     }
     
     @Override
-    public void insert(CandidatoVagaDialogo CandidatoVagaDialogo) throws BusinessException, PersistenceException {
+    public void insert(CandidatoVagaDialogo CandidatoVagaDialogo) throws BusinessException, PersistenceException, RemoteException {
         CandidatoVagaDialogoDao.insert(CandidatoVagaDialogo);
     }
 
     @Override
-    public List<CandidatoVagaDialogo> getCandidatoVagaDialogo(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException {
+    public List<CandidatoVagaDialogo> getCandidatoVagaDialogo(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         List<CandidatoVagaDialogo> result = CandidatoVagaDialogoDao.getCandidatoVagaDialogo(CPF, Cod_Cargo, CNPJ, Dat_Publicacao);
         return result;
     }
 
     @Override
-    public CandidatoVagaDialogo getCandidatoVagaDialogoCod(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, Timestamp Dat_Dialogo) throws PersistenceException {
+    public CandidatoVagaDialogo getCandidatoVagaDialogoCod(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, Timestamp Dat_Dialogo) throws PersistenceException, RemoteException {
         CandidatoVagaDialogo result = CandidatoVagaDialogoDao.getCandidatoVagaDialogoCod(CPF, Cod_Cargo, CNPJ, Dat_Publicacao, Dat_Dialogo);
         return result;
     }
