@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.CompetenciaDao;
 import br.cefetmg.implicare.model.domain.Competencia;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import java.util.List;
 public class CompetenciaDaoImpl implements CompetenciaDao {
 
     @Override
-    public List<Competencia> listAll() throws PersistenceException {
+    public List<Competencia> listAll() throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM Competencia ORDER BY Nom_Competencia;";
@@ -49,7 +50,7 @@ public class CompetenciaDaoImpl implements CompetenciaDao {
     }
 
     @Override
-    public Competencia getCompetenciaCod(int Cod_Competencia) throws PersistenceException {
+    public Competencia getCompetenciaCod(int Cod_Competencia) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM Competencia WHERE Cod_Competencia = ?";

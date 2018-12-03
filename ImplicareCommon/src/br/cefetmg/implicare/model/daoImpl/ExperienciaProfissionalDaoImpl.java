@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.ExperienciaProfissionalDao;
 import br.cefetmg.implicare.model.domain.ExperienciaProfissional;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDao {
 
     @Override
-    public void insert(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
+    public void insert(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             Long Seq_CompetenciaPessoaFisica;
 
@@ -55,7 +56,7 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
     }
 
     @Override
-    public boolean update(Long CPF, int Seq_Experiencia, int Cod_Cargo, ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
+    public boolean update(Long CPF, int Seq_Experiencia, int Cod_Cargo, ExperienciaProfissional ExperienciaProfissional) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String SQL = "UPDATE ExperienciaProfissional SET Nom_Empresa = ?, Cod_Cargo = ?, "
@@ -88,7 +89,7 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
     }
 
     @Override
-    public boolean delete(Long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
+    public boolean delete(Long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String SQL = "DELETE FROM ExperienciaProfissional"
@@ -111,7 +112,7 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
     }
 
     @Override
-    public List<ExperienciaProfissional> getExperienciasProfissionais(Long CPF) throws PersistenceException {
+    public List<ExperienciaProfissional> getExperienciasProfissionais(Long CPF) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM ExperienciaProfissional WHERE CPF = ? ORDER BY Seq_Experiencia;";
@@ -153,7 +154,7 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
     }
 
     @Override
-    public ExperienciaProfissional getExperienciaProfissionalCod(Long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException {
+    public ExperienciaProfissional getExperienciaProfissionalCod(Long CPF, int Seq_Experiencia, int Cod_Cargo) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             String sql = "SELECT * FROM ExperienciaProfissional WHERE CPF = ?, Seq_Experiencia = ?, Cod_Cargo = ?";
 

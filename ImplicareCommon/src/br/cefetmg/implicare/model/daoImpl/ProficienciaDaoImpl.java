@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.ProficienciaDao;
 import br.cefetmg.implicare.model.domain.Proficiencia;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ProficienciaDaoImpl implements ProficienciaDao {
 
     @Override
-    public List<Proficiencia> listAll() throws PersistenceException {
+    public List<Proficiencia> listAll() throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
@@ -50,7 +51,7 @@ public class ProficienciaDaoImpl implements ProficienciaDao {
     }
 
     @Override
-    public Proficiencia getProficienciaCod(int Cod_Proficiencia) throws PersistenceException {
+    public Proficiencia getProficienciaCod(int Cod_Proficiencia) throws PersistenceException, RemoteException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 

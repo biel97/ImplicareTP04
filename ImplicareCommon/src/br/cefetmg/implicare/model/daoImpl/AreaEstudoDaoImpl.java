@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.AreaEstudoDao;
 import br.cefetmg.implicare.model.domain.AreaEstudo;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 public class AreaEstudoDaoImpl implements AreaEstudoDao {
 
     @Override
-    public ArrayList<AreaEstudo> listAll() throws PersistenceException {
+    public ArrayList<AreaEstudo> listAll() throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM AreaEstudo ORDER BY Nom_Area_Estudo;";
@@ -48,7 +49,7 @@ public class AreaEstudoDaoImpl implements AreaEstudoDao {
     }
 
     @Override
-    public AreaEstudo getAreaEstudoCod(int Cod_Area_Estudo) throws PersistenceException {
+    public AreaEstudo getAreaEstudoCod(int Cod_Area_Estudo) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM AreaEstudo WHERE Cod_Area_Estudo = ?";

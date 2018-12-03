@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.FormacaoAcademicaDao;
 import br.cefetmg.implicare.model.domain.FormacaoAcademica;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import java.util.List;
 public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
 
     @Override
-    public void insert(FormacaoAcademica FormacaoAcademica) throws PersistenceException {
+    public void insert(FormacaoAcademica FormacaoAcademica) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             Long Seq_FormacaoAcademica;
 
@@ -53,7 +54,7 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
     }
 
     @Override
-    public boolean update(long CPF, int Seq_Formacao, int Cod_Area_Estudo, FormacaoAcademica FormacaoAcademica) throws PersistenceException {
+    public boolean update(long CPF, int Seq_Formacao, int Cod_Area_Estudo, FormacaoAcademica FormacaoAcademica) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String SQL = "UPDATE FormacaoAcademica SET Seq_Formacao = ?, Instituicao_Ensino = ?, "
@@ -85,7 +86,7 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
     }
 
     @Override
-    public boolean delete(long CPF, int Seq_Formacao, int Cod_Area_Estudo) throws PersistenceException {
+    public boolean delete(long CPF, int Seq_Formacao, int Cod_Area_Estudo) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String SQL = "DELETE FROM FormacaoAcademica"
@@ -108,7 +109,7 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
     }
 
     @Override
-    public List<FormacaoAcademica> getFormacaoAcademica(long CPF) throws PersistenceException {
+    public List<FormacaoAcademica> getFormacaoAcademica(long CPF) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             String sql = "SELECT * FROM FormacaoAcademica WHERE CPF = ? ORDER BY Seq_Formacao;";
 
@@ -145,7 +146,7 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
     }
 
     @Override
-    public FormacaoAcademica getFormacaoAcademicaCod(long CPF, int Seq_Formacao, int Cod_Area_Estudo) throws PersistenceException {
+    public FormacaoAcademica getFormacaoAcademicaCod(long CPF, int Seq_Formacao, int Cod_Area_Estudo) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM FormacaoAcademica WHERE CPF = ?, Seq_Formacao = ?, Cod_Area_Estudo = ?";

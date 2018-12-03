@@ -2,6 +2,7 @@ package br.cefetmg.implicare.model.dao;
 
 import br.cefetmg.implicare.model.domain.AreaEstudo;
 import br.cefetmg.implicare.model.exception.PersistenceException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  */
 public interface AreaEstudoDao {
 
-    public ArrayList<AreaEstudo> listAll() throws PersistenceException;
+    public ArrayList<AreaEstudo> listAll() throws PersistenceException, RemoteException;
 
-    public AreaEstudo getAreaEstudoCod(int Cod_Area_Estudo) throws PersistenceException;
+    public AreaEstudo getAreaEstudoCod(int Cod_Area_Estudo) throws PersistenceException, RemoteException;
 }

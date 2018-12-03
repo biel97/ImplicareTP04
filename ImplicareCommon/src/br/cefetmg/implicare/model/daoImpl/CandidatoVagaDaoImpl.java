@@ -4,6 +4,7 @@ import br.cefetmg.implicare.model.dao.CandidatoVagaDao;
 import br.cefetmg.implicare.model.domain.CandidatoVaga;
 import br.cefetmg.implicare.model.exception.PersistenceException;
 import br.cefetmg.implicare.util.db.JDBCConnectionManager;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -18,7 +19,7 @@ import java.util.List;
 public class CandidatoVagaDaoImpl implements CandidatoVagaDao {
 
     @Override
-    public void insert(CandidatoVaga CandidatoVaga) throws PersistenceException {
+    public void insert(CandidatoVaga CandidatoVaga) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             Long Seq_CandidatoVaga;
 
@@ -50,7 +51,7 @@ public class CandidatoVagaDaoImpl implements CandidatoVagaDao {
     }
 
     @Override
-    public boolean update(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, CandidatoVaga CandidatoVaga) throws PersistenceException {
+    public boolean update(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, CandidatoVaga CandidatoVaga) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String SQL = "UPDATE CandidatoVaga SET Status_Candidato = ? "
@@ -77,7 +78,7 @@ public class CandidatoVagaDaoImpl implements CandidatoVagaDao {
     }
 
     @Override
-    public List<CandidatoVaga> getCandidatosVaga(int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException {
+    public List<CandidatoVaga> getCandidatosVaga(int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         List<CandidatoVaga> ListCand = null;
         CandidatoVaga Cand = new CandidatoVaga();
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
@@ -111,7 +112,7 @@ public class CandidatoVagaDaoImpl implements CandidatoVagaDao {
     }
 
     @Override
-    public CandidatoVaga getCandidatoVagaCod(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException {
+    public CandidatoVaga getCandidatoVagaCod(long CPF, int Cod_Cargo, long CNPJ, Date Dat_Publicacao) throws PersistenceException, RemoteException {
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM CandidatoVaga WHERE CPF = ?, Cod_Cargo = ?, CNPJ = ?, Dat_Publicacao = ?";
